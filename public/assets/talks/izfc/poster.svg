@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <radialGradient id="g" cx="30%" cy="20%" r="80%">
+      <stop offset="0%" stop-color="#2E6B58"/>
+      <stop offset="100%" stop-color="#143329"/>
+    </radialGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <text x="80" y="640" font-family="Georgia, 'Times New Roman', serif" font-size="44" fill="#FAF7F2">IZFC 2025</text>
+  <text x="80" y="680" font-family="Inter, sans-serif" font-size="22" fill="#FAF7F2" opacity="0.7">Oral presentation</text>
+</svg>

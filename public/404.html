@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Abhinav Bachu</title>
+    <script>
+      // GH Pages SPA shim: rewrite /any/deep/path?x=y -> /?/any/deep/path&x=y
+      // main.tsx unpacks it back into history before React mounts.
+      (function () {
+        var l = window.location;
+        var segs = l.pathname.split("/").slice(1).filter(Boolean);
+        var redirect =
+          "/?/" + segs.join("/") + (l.search ? "&" + l.search.slice(1) : "") + l.hash;
+        l.replace(redirect);
+      })();
+    </script>
+  </head>
+  <body></body>
+</html>

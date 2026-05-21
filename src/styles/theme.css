@@ -1,0 +1,617 @@
+@import "tailwindcss";
+
+@theme {
+  /* Forest accent palette */
+  --color-accent: #1f4d3f;
+  --color-accent-light: #2e6b58;
+  --color-accent-deep: #143329;
+  --color-accent-tint: #e8f0ec;
+
+  /* Warm neutrals */
+  --color-bg: #faf7f2;
+  --color-bg-elevated: #ffffff;
+  --color-ink: #0f1b17;
+  --color-ink-muted: #5b6864;
+  --color-ink-subtle: #8b9591;
+  --color-border: #e6e1d7;
+  --color-border-strong: #d2ccc0;
+  --color-panel: #f3efe6;
+
+  /* Status (kept conservative; only used where genuinely needed) */
+  --color-success: #2e6b58;
+  --color-warning: #b45309;
+  --color-error: #b91c1c;
+
+  /* Typography */
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+    "Helvetica Neue", sans-serif;
+  --font-serif: "Newsreader", "Iowan Old Style", "Apple Garamond", Georgia,
+    "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* Radii */
+  --radius-sm: 0.375rem;
+  --radius: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+
+  /* Shadows — Veracare-derived, retinted slightly warmer */
+  --shadow-soft: 0 2px 10px rgba(20, 51, 41, 0.05);
+  --shadow-soft-md: 0 4px 20px rgba(20, 51, 41, 0.08);
+  --shadow-soft-lg: 0 10px 30px rgba(20, 51, 41, 0.12);
+}
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    border-color: var(--color-border);
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-serif);
+    color: var(--color-ink);
+    font-weight: 500;
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 2.6vw, 2rem);
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+  }
+
+  p {
+    line-height: 1.6;
+  }
+
+  a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 180ms ease;
+  }
+
+  a:hover {
+    color: var(--color-accent-deep);
+  }
+
+  ::selection {
+    background: var(--color-accent-tint);
+    color: var(--color-accent-deep);
+  }
+
+  code,
+  pre {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+  }
+}
+
+/* Motion utilities (Veracare-derived) */
+@keyframes vFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes vSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vSlideUpSm {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes vShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes vPulseGlow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(31, 77, 63, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 14px 4px rgba(31, 77, 63, 0.12);
+  }
+}
+
+.v-fade-in {
+  opacity: 0;
+  animation: vFadeIn 0.6s ease-out forwards;
+}
+
+.v-slide-up {
+  opacity: 0;
+  animation: vSlideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.v-slide-up-sm {
+  opacity: 0;
+  animation: vSlideUpSm 0.4s ease-out forwards;
+}
+
+.v-stagger-1 { animation-delay: 60ms; }
+.v-stagger-2 { animation-delay: 120ms; }
+.v-stagger-3 { animation-delay: 180ms; }
+.v-stagger-4 { animation-delay: 240ms; }
+.v-stagger-5 { animation-delay: 300ms; }
+.v-stagger-6 { animation-delay: 360ms; }
+
+.v-surface {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 300ms ease, transform 300ms ease,
+    border-color 300ms ease;
+}
+
+.v-surface-hover:hover {
+  box-shadow: var(--shadow-soft-md);
+  transform: translateY(-2px);
+  border-color: var(--color-border-strong);
+}
+
+.v-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.v-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--color-accent);
+  border-radius: 0 2px 2px 0;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.v-card:hover::before {
+  opacity: 1;
+}
+
+.v-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(31, 77, 63, 0) 0%,
+    rgba(31, 77, 63, 0.12) 50%,
+    rgba(31, 77, 63, 0) 100%
+  );
+  background-size: 200% 100%;
+  animation: vShimmer 1.4s linear infinite;
+}
+
+.v-glow {
+  animation: vPulseGlow 2.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v-fade-in,
+  .v-slide-up,
+  .v-slide-up-sm {
+    animation: none !important;
+    opacity: 1;
+  }
+  .v-shimmer,
+  .v-glow {
+    animation: none !important;
+  }
+}
+
+/* ======================================================================
+   Tool skins — each demo carries the actual visual style of the real tool.
+   These are scoped to .skin-<tool> wrappers so they don't bleed into the
+   surrounding site chrome.
+   ====================================================================== */
+
+/* AutoBarcoder — dark, blue accent (matches webapp/frontend/index.html) */
+.skin-autobarcoder {
+  --ab-bg: #0b0d10;
+  --ab-panel: #14171c;
+  --ab-panel-2: #1b1f26;
+  --ab-border: #262b34;
+  --ab-text: #e6e9ef;
+  --ab-muted: #8a93a3;
+  --ab-accent: #3b82f6;
+  --ab-accent-2: #22c55e;
+  --ab-warn: #f59e0b;
+  --ab-err: #ef4444;
+  background: var(--ab-bg);
+  color: var(--ab-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+}
+.skin-autobarcoder .ab-panel {
+  background: var(--ab-panel);
+  border: 1px solid var(--ab-border);
+  border-radius: 10px;
+  padding: 20px 22px;
+}
+.skin-autobarcoder .ab-h2 {
+  margin: 0 0 14px;
+  font-size: 14px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--ab-muted);
+  font-weight: 600;
+}
+.skin-autobarcoder .ab-label {
+  display: block;
+  font-size: 12.5px;
+  color: var(--ab-muted);
+  margin: 12px 0 5px;
+}
+.skin-autobarcoder .ab-input,
+.skin-autobarcoder .ab-textarea {
+  width: 100%;
+  padding: 9px 11px;
+  background: var(--ab-panel-2);
+  color: var(--ab-text);
+  border: 1px solid var(--ab-border);
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.skin-autobarcoder .ab-textarea { min-height: 60px; resize: vertical; }
+.skin-autobarcoder .ab-file-drop {
+  border: 1.5px dashed var(--ab-border);
+  border-radius: 8px;
+  padding: 22px;
+  text-align: center;
+  color: var(--ab-muted);
+  cursor: pointer;
+  transition: 0.15s;
+}
+.skin-autobarcoder .ab-file-drop.has-file {
+  border-color: var(--ab-accent-2);
+  color: var(--ab-text);
+}
+.skin-autobarcoder .ab-btn {
+  background: var(--ab-accent);
+  color: white;
+  border: 0;
+  padding: 10px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.skin-autobarcoder .ab-btn:hover { filter: brightness(1.1); }
+.skin-autobarcoder .ab-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.skin-autobarcoder .ab-btn-secondary {
+  background: var(--ab-panel-2);
+  border: 1px solid var(--ab-border);
+  color: var(--ab-text);
+}
+.skin-autobarcoder .ab-pill {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 99px;
+  background: var(--ab-panel-2);
+  color: var(--ab-muted);
+}
+.skin-autobarcoder .ab-pill-running { background: #2e3a52; color: #93c5fd; }
+.skin-autobarcoder .ab-pill-done    { background: #173d29; color: #86efac; }
+.skin-autobarcoder .ab-progress {
+  height: 6px;
+  background: var(--ab-panel-2);
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.skin-autobarcoder .ab-step-num {
+  background: var(--ab-panel-2);
+  width: 24px; height: 24px;
+  border-radius: 99px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px;
+}
+.skin-autobarcoder .ab-step-num-done { background: var(--ab-accent-2); color: white; }
+
+/* Leaf_Cutter — light gray, Bootstrap blue */
+.skin-leafcutter {
+  --lc-bg: #f8f9fa;
+  --lc-surface: #ffffff;
+  --lc-border: #dee2e6;
+  --lc-text: #212529;
+  --lc-muted: #6c757d;
+  --lc-accent: #0d6efd;
+  --lc-accent-hover: #0b5ed7;
+  background: var(--lc-bg);
+  color: var(--lc-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+.skin-leafcutter .lc-card {
+  background: var(--lc-surface);
+  border: 1px solid var(--lc-border);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.skin-leafcutter .lc-card h2 {
+  font-family: inherit;
+  font-size: 1.1rem;
+  margin: 0 0 12px;
+  border-bottom: 1px solid var(--lc-border);
+  padding-bottom: 8px;
+  color: var(--lc-text);
+  letter-spacing: normal;
+}
+.skin-leafcutter .lc-label { display: block; font-weight: 600; font-size: 0.875rem; margin-top: 10px; margin-bottom: 2px; }
+.skin-leafcutter .lc-input,
+.skin-leafcutter .lc-select {
+  width: 100%; padding: 8px 10px; border: 1px solid var(--lc-border);
+  border-radius: 4px; font-size: 0.9rem; background: white; color: var(--lc-text);
+}
+.skin-leafcutter .lc-btn {
+  display: inline-block; padding: 10px 20px; border: none; border-radius: 4px;
+  font-size: 0.95rem; font-weight: 600; cursor: pointer;
+  background: var(--lc-accent); color: #fff;
+}
+.skin-leafcutter .lc-btn:hover { background: var(--lc-accent-hover); }
+.skin-leafcutter .lc-btn:disabled { opacity: .5; cursor: not-allowed; }
+.skin-leafcutter .lc-badge {
+  display: inline-block; padding: 3px 10px; border-radius: 12px;
+  font-size: 0.78rem; font-weight: 600; text-transform: uppercase;
+}
+.skin-leafcutter .lc-badge-queued    { background: #e2e3e5; color: #41464b; }
+.skin-leafcutter .lc-badge-submitted { background: #cff4fc; color: #055160; }
+.skin-leafcutter .lc-badge-running   { background: #fff3cd; color: #664d03; }
+.skin-leafcutter .lc-badge-succeeded { background: #d1e7dd; color: #0f5132; }
+.skin-leafcutter .lc-progress-track  { width: 100%; height: 22px; background: #e9ecef; border-radius: 4px; overflow: hidden; position: relative; }
+.skin-leafcutter .lc-progress-fill   { height: 100%; background: linear-gradient(90deg, var(--lc-accent), #3d8bfd); transition: width 0.4s ease; }
+.skin-leafcutter .lc-tabs            { display: flex; gap: 0; border-bottom: 2px solid var(--lc-border); }
+.skin-leafcutter .lc-tab             { padding: 8px 16px; cursor: pointer; font-size: 0.9rem; font-weight: 600; color: var(--lc-muted); border-bottom: 2px solid transparent; margin-bottom: -2px; background: transparent; border-left: 0; border-right: 0; border-top: 0; }
+.skin-leafcutter .lc-tab.active      { color: var(--lc-accent); border-bottom-color: var(--lc-accent); }
+.skin-leafcutter .lc-hint            { font-size: 0.78rem; color: var(--lc-muted); margin-top: 2px; }
+.skin-leafcutter .lc-radio-row      { display: flex; gap: 20px; }
+.skin-leafcutter .lc-radio-row label { display: inline-flex; align-items: center; gap: 6px; font-weight: 500; cursor: pointer; }
+
+/* ZebraCHOP — light blue-gray, sky-blue accent */
+.skin-zebrachop {
+  --zc-bg: #f4f6fa;
+  --zc-panel: #ffffff;
+  --zc-border: #d8dee9;
+  --zc-text: #1a202c;
+  --zc-muted: #5a6473;
+  --zc-accent: #0ea5e9;
+  --zc-accent-2: #0284c7;
+  background: var(--zc-bg);
+  color: var(--zc-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+}
+.skin-zebrachop .zc-panel {
+  background: var(--zc-panel);
+  border: 1px solid var(--zc-border);
+  border-radius: 10px;
+  padding: 22px;
+}
+.skin-zebrachop .zc-h2 {
+  font-size: 13px; margin: 0 0 14px; color: var(--zc-muted);
+  text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;
+  font-family: inherit;
+}
+.skin-zebrachop .zc-label { display: block; font-size: 13px; font-weight: 600; margin: 14px 0 5px; color: var(--zc-text); }
+.skin-zebrachop .zc-input,
+.skin-zebrachop .zc-textarea,
+.skin-zebrachop .zc-select {
+  width: 100%; padding: 9px 11px; border: 1px solid var(--zc-border);
+  border-radius: 6px; font-size: 13px; background: #fafbfd; color: var(--zc-text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.skin-zebrachop .zc-textarea { min-height: 90px; resize: vertical; }
+.skin-zebrachop .zc-btn {
+  background: var(--zc-accent); color: #fff; border: 0; padding: 10px 20px;
+  border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.skin-zebrachop .zc-btn:hover { background: var(--zc-accent-2); }
+.skin-zebrachop .zc-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.skin-zebrachop .zc-btn-secondary { background: #fff; border: 1px solid var(--zc-border); color: var(--zc-text); }
+.skin-zebrachop .zc-pill {
+  font-size: 11px; padding: 3px 8px; border-radius: 99px;
+  background: #eef2f7; color: var(--zc-muted);
+}
+.skin-zebrachop .zc-pill-running { background: #dbeafe; color: #1e40af; }
+.skin-zebrachop .zc-pill-done    { background: #dcfce7; color: #166534; }
+.skin-zebrachop .zc-gene-tab     { padding: 6px 12px; background: #eef2f7; border-radius: 6px; cursor: pointer; font-size: 12px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--zc-text); border: 0; }
+.skin-zebrachop .zc-gene-tab-active { background: var(--zc-accent); color: #fff; }
+
+/* Veracare — indigo (matches Veracareresponsivewebapp-abhi/src/styles/theme.css) */
+.skin-veracare {
+  --vc-bg: #f8fafc;
+  --vc-card: #ffffff;
+  --vc-border: #e2e8f0;
+  --vc-ink: #0F1F3D;
+  --vc-ink-2: #1E2D4A;
+  --vc-muted: #64748b;
+  --vc-accent: #3B4FD8;
+  --vc-accent-light: #5C6DE0;
+  --vc-accent-deep: #2A3BB0;
+  --vc-tint: #EEF2FF;
+  --vc-success: #16a34a;
+  --vc-warning: #d97706;
+  background: var(--vc-bg);
+  color: var(--vc-ink);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+.skin-veracare {
+  /* Re-skin the existing demo components by overriding the site palette
+     locally — components written with var(--color-accent) automatically
+     pick up Veracare's indigo without any per-component changes. */
+  --color-accent: var(--vc-accent);
+  --color-accent-light: var(--vc-accent-light);
+  --color-accent-deep: var(--vc-accent-deep);
+  --color-accent-tint: var(--vc-tint);
+  --color-ink: var(--vc-ink);
+  --color-ink-muted: var(--vc-muted);
+  --color-ink-subtle: #94a3b8;
+  --color-bg: var(--vc-bg);
+  --color-bg-elevated: var(--vc-card);
+  --color-panel: #f1f5f9;
+  --color-border: var(--vc-border);
+  --color-border-strong: #cbd5e1;
+}
+.skin-veracare .vc-card {
+  background: var(--vc-card);
+  border: 1px solid var(--vc-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 10px rgba(15, 31, 61, 0.05);
+}
+
+/* MES (Motor Engagement Signal) — LeafCutter-derived light skin with burnt-orange accent */
+.skin-mes {
+  --mes-bg: #f8f9fa;
+  --mes-surface: #ffffff;
+  --mes-border: #e6e3dc;
+  --mes-text: #1f2933;
+  --mes-muted: #6b7280;
+  --mes-accent: #c2410c;
+  --mes-accent-hover: #9a3412;
+  --mes-accent-soft: #fff7ed;
+  --mes-good: #166534;
+  --mes-warn: #92400e;
+  --mes-amber: #b45309;
+  background: var(--mes-bg);
+  color: var(--mes-text);
+  font-family: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", sans-serif;
+}
+.skin-mes .mes-card {
+  background: var(--mes-surface);
+  border: 1px solid var(--mes-border);
+  border-radius: 8px;
+  padding: 20px;
+}
+.skin-mes .mes-card h2 {
+  font-size: 1.05rem; font-weight: 600; margin: 0 0 12px;
+  padding-bottom: 8px; border-bottom: 1px solid var(--mes-border);
+  color: var(--mes-text); font-family: inherit; letter-spacing: 0;
+}
+.skin-mes .mes-label  { display: block; font-weight: 600; font-size: 0.875rem; margin: 12px 0 4px; color: var(--mes-text); }
+.skin-mes .mes-input,
+.skin-mes .mes-select {
+  width: 100%; padding: 8px 10px; border: 1px solid var(--mes-border);
+  border-radius: 5px; font-size: 0.9rem; background: white; color: var(--mes-text);
+}
+.skin-mes .mes-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 9px 18px; border: 0; border-radius: 5px;
+  font-size: 0.9rem; font-weight: 600; cursor: pointer;
+  background: var(--mes-accent); color: #fff;
+}
+.skin-mes .mes-btn:hover { background: var(--mes-accent-hover); }
+.skin-mes .mes-btn:disabled { opacity: .5; cursor: not-allowed; }
+.skin-mes .mes-btn-secondary {
+  background: var(--mes-surface); color: var(--mes-text);
+  border: 1px solid var(--mes-border);
+}
+.skin-mes .mes-btn-secondary:hover { background: #f1f3f5; }
+.skin-mes .mes-badge {
+  display: inline-block; padding: 3px 10px; border-radius: 12px;
+  font-size: 0.78rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px;
+}
+.skin-mes .mes-badge-idle      { background: #e2e3e5; color: #41464b; }
+.skin-mes .mes-badge-running   { background: #fff3cd; color: #664d03; }
+.skin-mes .mes-badge-done      { background: #ffedd5; color: var(--mes-accent-hover); }
+.skin-mes .mes-progress-track  {
+  width: 100%; height: 22px; background: #e9ecef; border-radius: 4px; overflow: hidden; position: relative;
+}
+.skin-mes .mes-progress-fill   {
+  height: 100%; background: linear-gradient(90deg, var(--mes-accent), #f97316);
+  transition: width 0.35s ease;
+}
+.skin-mes .mes-hint            { font-size: 0.78rem; color: var(--mes-muted); margin-top: 4px; }
+.skin-mes .mes-file-drop {
+  border: 1.5px dashed var(--mes-border); border-radius: 6px; padding: 16px;
+  text-align: center; color: var(--mes-muted); background: #fafbfc;
+}
+.skin-mes .mes-file-drop.has-file { border-color: var(--mes-accent); color: var(--mes-text); background: var(--mes-accent-soft); }
+.skin-mes .mes-pill-stat {
+  display: inline-flex; flex-direction: column; gap: 1px;
+  padding: 6px 10px; border-radius: 6px; background: #f1f3f5;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.skin-mes .mes-pill-stat .k {
+  font-size: 9.5px; text-transform: uppercase; color: var(--mes-muted); letter-spacing: 0.6px;
+  font-family: -apple-system, sans-serif; font-weight: 600;
+}
+.skin-mes .mes-pill-stat .v { font-size: 13px; font-weight: 700; color: var(--mes-text); }
+
+/* Print */
+@media print {
+  @page {
+    margin: 0.75in;
+  }
+  body {
+    background: white;
+    color: black;
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+  }
+  .print\:hidden {
+    display: none !important;
+  }
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+  .v-surface {
+    box-shadow: none;
+    border-color: #ccc;
+  }
+}
