@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PageShell, { Section } from "@/components/layout/PageShell";
+import InstallSection from "@/components/layout/InstallSection";
 import GuidedDemo, { Glossary, type GuideStep } from "@/components/demo/GuidedDemo";
 import AutoBarcoderDemo, {
   type AutoBarcoderPhase,
@@ -259,6 +260,7 @@ export default function AutoBarcoder() {
       timeline="2024 – 2025"
       externalLinks={[
         { label: "GitHub", href: "https://github.com/abachu2005/AutoBarcoder-OS-" },
+        { label: "PyPI", href: "https://pypi.org/project/autobarcoder/" },
         { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/929581836" },
       ]}
     >
@@ -289,18 +291,26 @@ export default function AutoBarcoder() {
         />
       </Section>
 
+      <InstallSection
+        packageName="autobarcoder"
+        pypiUrl="https://pypi.org/project/autobarcoder/"
+        biocondaUrl="https://github.com/bioconda/bioconda-recipes/pull/65642"
+        setupCommand="autobarcoder-setup"
+        webCommand="autobarcoder-web"
+      />
+
       <Section title="What I built">
         <ul className="list-disc space-y-2 pl-5 text-[var(--color-ink-muted)] marker:text-[var(--color-accent)]">
           <li>End-to-end demultiplexing and clustering algorithm in pure Python.</li>
-          <li>Three frontends: a Flask web UI, a Tkinter desktop GUI, and a Python API.</li>
-          <li>Docker image, Conda recipe, CI pipeline, and a Zenodo-archived release with citable DOI.</li>
+          <li>Three frontends: a FastAPI web UI, a Tkinter desktop GUI, and a setup wizard CLI.</li>
+          <li>PyPI and bioconda packages, Docker image, CI pipeline, and a Zenodo-archived release with citable DOI.</li>
           <li>Documentation that walks a bench scientist from raw FASTQ to per-well PDF in under five minutes.</li>
         </ul>
       </Section>
 
       <Section title="Stack">
         <div className="flex flex-wrap gap-2">
-          {["Python", "Flask", "Tkinter", "Levenshtein", "matplotlib", "Docker", "GitHub Actions", "Zenodo"].map((t) => (
+          {["Python", "FastAPI", "Tkinter", "Levenshtein", "matplotlib", "PyPI", "Bioconda", "Docker", "GitHub Actions", "Zenodo"].map((t) => (
             <span
               key={t}
               className="rounded-full border border-[var(--color-border)] bg-[var(--color-panel)] px-2.5 py-1 text-xs text-[var(--color-ink-muted)]"

@@ -17,10 +17,11 @@ export const projects: Project[] = [
     oneLiner:
       "Open-source bioinformatics tool that sorts sequencing reads back into 96 wells and clusters the variable RNA barcode between two flanks.",
     href: "/projects/autobarcoder",
-    tags: ["Open source", "Bioinformatics", "Python", "DOI"],
+    tags: ["Open source", "Bioinformatics", "Python", "PyPI", "DOI"],
     status: "live",
     external: [
       { label: "GitHub", href: "https://github.com/abachu2005/AutoBarcoder-OS-" },
+      { label: "PyPI", href: "https://pypi.org/project/autobarcoder/" },
       { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/929581836" },
     ],
   },
@@ -31,8 +32,13 @@ export const projects: Project[] = [
     oneLiner:
       "Open-source pipeline that detects differentially spliced junctions across conditions, from raw alignments to ranked hits.",
     href: "/projects/leafminer",
-    tags: ["Open source", "Bioinformatics", "Python", "Pipeline"],
+    tags: ["Open source", "Bioinformatics", "Python", "PyPI", "Pipeline"],
     status: "live",
+    external: [
+      { label: "GitHub", href: "https://github.com/abachu2005/Leaf_Cutter" },
+      { label: "PyPI", href: "https://pypi.org/project/leafcutter2-pipeline/" },
+      { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/1170208699" },
+    ],
   },
   {
     slug: "zebrachop",
@@ -41,8 +47,13 @@ export const projects: Project[] = [
     oneLiner:
       "Open-source command-line + web tool for designing and analyzing CRISPR experiments in zebrafish, at batch scale.",
     href: "/projects/zebrachop",
-    tags: ["Open source", "CRISPR", "Python", "Zebrafish"],
+    tags: ["Open source", "CRISPR", "Python", "PyPI", "Zebrafish"],
     status: "live",
+    external: [
+      { label: "GitHub", href: "https://github.com/abachu2005/ZebraCHOP" },
+      { label: "PyPI", href: "https://pypi.org/project/zebrachop/" },
+      { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/1129378260" },
+    ],
   },
   {
     slug: "veracare",

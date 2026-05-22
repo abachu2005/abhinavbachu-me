@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PageShell, { Section } from "@/components/layout/PageShell";
+import InstallSection from "@/components/layout/InstallSection";
 import GuidedDemo, {
   Glossary,
   type GuideStep,
@@ -191,6 +192,7 @@ export default function ZebraCHOP() {
       timeline="2024 – 2025"
       externalLinks={[
         { label: "GitHub", href: "https://github.com/abachu2005/ZebraCHOP" },
+        { label: "PyPI", href: "https://pypi.org/project/zebrachop/" },
         { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/1129378260" },
       ]}
     >
@@ -220,6 +222,15 @@ export default function ZebraCHOP() {
         />
       </Section>
 
+      <InstallSection
+        packageName="zebrachop"
+        pypiUrl="https://pypi.org/project/zebrachop/"
+        biocondaUrl="https://github.com/bioconda/bioconda-recipes/pull/65644"
+        setupCommand="python3 bin/zebrachop-setup   # from a git clone"
+        webCommand="zebrachop-web"
+        note="The PyPI package ships the FastAPI frontend. The legacy CHOPCHOP engine (Python 2) is included in the git checkout and launched as a subprocess."
+      />
+
       <Section title="What I built">
         <ul className="list-disc space-y-2 pl-5 text-[var(--color-ink-muted)] marker:text-[var(--color-accent)]">
           <li>End-to-end FastAPI pipeline: gene table → twoBitToFa → Doench 2016 → Bowtie off-targets → Ensembl-aware re-ranking.</li>
@@ -231,7 +242,7 @@ export default function ZebraCHOP() {
 
       <Section title="Stack">
         <div className="flex flex-wrap gap-2">
-          {["Python", "FastAPI", "Bowtie", "twoBitToFa", "Doench 2016", "Ensembl REST", "JavaScript", "Docker"].map((t) => (
+          {["Python", "FastAPI", "Bowtie", "twoBitToFa", "Doench 2016", "Ensembl REST", "JavaScript", "PyPI", "Bioconda", "Docker"].map((t) => (
             <span
               key={t}
               className="rounded-full border border-[var(--color-border)] bg-[var(--color-panel)] px-2.5 py-1 text-xs text-[var(--color-ink-muted)]"

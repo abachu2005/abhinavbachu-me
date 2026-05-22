@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PageShell, { Section } from "@/components/layout/PageShell";
+import InstallSection from "@/components/layout/InstallSection";
 import GuidedDemo, {
   Glossary,
   type GuideStep,
@@ -179,7 +180,8 @@ export default function LeafCutter() {
       role="Solo developer · lead author"
       timeline="2024 – 2025"
       externalLinks={[
-        { label: "GitHub", href: "https://github.com/abachu2005/LeafMiner" },
+        { label: "GitHub", href: "https://github.com/abachu2005/Leaf_Cutter" },
+        { label: "PyPI", href: "https://pypi.org/project/leafcutter2-pipeline/" },
         { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/1170208699" },
       ]}
     >
@@ -205,6 +207,15 @@ export default function LeafCutter() {
         />
       </Section>
 
+      <InstallSection
+        packageName="leafcutter2-pipeline"
+        pypiUrl="https://pypi.org/project/leafcutter2-pipeline/"
+        biocondaUrl="https://github.com/bioconda/bioconda-recipes/pull/65643"
+        setupCommand="leafcutter2-pipeline --help"
+        webCommand="leafcutter2-web"
+        note="For full ENA-scale runs, clone the repo and use the interactive setup wizard (python3 bin/leafcutter-setup)."
+      />
+
       <Section title="What I built">
         <ul className="list-disc space-y-2 pl-5 text-[var(--color-ink-muted)] marker:text-[var(--color-accent)]">
           <li>The full pipeline: reference setup → STAR → LeafCutter2 → classification → statistical test → ranking.</li>
@@ -216,7 +227,7 @@ export default function LeafCutter() {
 
       <Section title="Stack">
         <div className="flex flex-wrap gap-2">
-          {["Python", "FastAPI", "STAR", "LeafCutter2", "samtools", "regtools", "pandas", "scipy", "statsmodels", "Slurm", "Docker", "GitHub Actions"].map((t) => (
+          {["Python", "FastAPI", "STAR", "LeafCutter2", "samtools", "regtools", "pandas", "scipy", "statsmodels", "PyPI", "Bioconda", "Slurm", "Docker", "GitHub Actions"].map((t) => (
             <span
               key={t}
               className="rounded-full border border-[var(--color-border)] bg-[var(--color-panel)] px-2.5 py-1 text-xs text-[var(--color-ink-muted)]"
