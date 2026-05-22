@@ -55,7 +55,7 @@ export default function PasswordGate({
         try {
           sessionStorage.setItem(storageKey, "1");
         } catch {
-          // ignore — user can still proceed for this session in memory
+          // ignore, user can still proceed for this session in memory
         }
         setUnlocked(true);
       } else {

@@ -94,7 +94,7 @@ export const scenarios: MesScenario[] = [
       "Healthy participant, 24 trials of cued right-hand grasp imagery. " +
       "Strong contralateral ERD over the left motor strip; stable MES around 72/100.",
     config: {
-      task: "Right hand — motor imagery",
+      task: "Right hand, motor imagery",
       targetLimb: "Right hand",
       headset: "OpenBCI Cyton+Daisy",
       sampleRate: 125,

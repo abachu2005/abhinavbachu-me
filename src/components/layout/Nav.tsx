@@ -4,7 +4,7 @@ import { cn } from "@/lib/cn";
 const links = [
   { to: "/#parvez-lab-oss", label: "Parvez Lab OSS" },
   { to: "/#neurotech", label: "Neurotech" },
-  { to: "/#veracare", label: "Veracare" },
+  { to: "/#veracare", label: "VeraCare" },
   { to: "/#izfc", label: "IZFC" },
   { to: "/#contact", label: "Contact" },
 ];

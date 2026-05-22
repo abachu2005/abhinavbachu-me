@@ -5,7 +5,7 @@ import { mariaThread } from "@/data/veracareV2";
 
 // Plain iMessage clone. Filters Maria's thread down to the SMS bubbles and
 // date dividers, drops everything else. One contact (GI Associates), one
-// thread — all incoming bubbles are gray regardless of who's typing back.
+// thread, all incoming bubbles are gray regardless of who's typing back.
 // Tap the send button to fire Maria's next outgoing message; the clinic's
 // replies stream back automatically.
 

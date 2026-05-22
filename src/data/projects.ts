@@ -25,12 +25,12 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "leafcutter",
-    name: "Leaf_Cutter",
+    slug: "leafminer",
+    name: "LeafMiner",
     tagline: "End-to-end alternative-splicing pipeline with built-in clustering and scoring.",
     oneLiner:
       "Open-source pipeline that detects differentially spliced junctions across conditions, from raw alignments to ranked hits.",
-    href: "/projects/leafcutter",
+    href: "/projects/leafminer",
     tags: ["Open source", "Bioinformatics", "Python", "Pipeline"],
     status: "live",
   },
@@ -46,7 +46,7 @@ export const projects: Project[] = [
   },
   {
     slug: "veracare",
-    name: "Veracare",
+    name: "VeraCare",
     tagline: "AI-assisted surgical care navigation for patients and providers.",
     oneLiner:
       "My startup. A platform that guides patients through their full surgical journey while giving providers a unified workspace.",

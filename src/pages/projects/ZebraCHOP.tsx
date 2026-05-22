@@ -23,7 +23,7 @@ export default function ZebraCHOP() {
               term="CRISPR"
               def="A molecular tool that lets researchers cut DNA at a precise location they choose."
             />{" "}
-            is famous for being precise — but only if you pick the right{" "}
+            is famous for being precise, but only if you pick the right{" "}
             <Glossary
               term="guide RNA"
               def="A short ~20-letter RNA sequence that tells the CRISPR scissors which spot in the genome to cut."
@@ -73,8 +73,7 @@ export default function ZebraCHOP() {
           <Glossary
             term="Doench 2016 model"
             def="A machine-learning model trained on real CRISPR experiments that predicts how effectively a given guide RNA will cut its target."
-          />
-          , and checks the whole genome for{" "}
+          />, and checks the whole genome for{" "}
           <Glossary
             term="off-targets"
             def="Other places in the genome that look similar to the intended cut site, which CRISPR might accidentally cut."
@@ -112,7 +111,7 @@ export default function ZebraCHOP() {
         <p>
           These are the real top-ranked guides for <strong>rx3</strong>, a
           zebrafish eye-development gene. The #1 guide has zero off-targets
-          and the highest predicted efficiency in this gene — exactly what
+          and the highest predicted efficiency in this gene, exactly what
           you want.
         </p>
       ),
@@ -130,7 +129,7 @@ export default function ZebraCHOP() {
       title: "Click tbx16 to switch genes",
       body: (
         <p>
-          Each gene gets its own ranked guide table. Go ahead — click the
+          Each gene gets its own ranked guide table. Go ahead, click the
           tbx16 tab.
         </p>
       ),
@@ -145,7 +144,7 @@ export default function ZebraCHOP() {
       id: "tbx16-results",
       target: "zc-table",
       placement: "left",
-      title: "tbx16 — a mesoderm master regulator",
+      title: "tbx16, a mesoderm master regulator",
       body: (
         <p>
           tbx16's #1 guide has a higher predicted{" "}
@@ -197,7 +196,7 @@ export default function ZebraCHOP() {
     >
       <Section title="What it is, in one paragraph">
         <p>
-          CRISPR is only useful if you pick a good guide RNA — short DNA tags
+          CRISPR is only useful if you pick a good guide RNA, short DNA tags
           that aim the molecular scissors. Bad guides miss the target, cut the
           wrong place, or do nothing. ZebraCHOP automates the whole guide-design
           workflow for the zebrafish genome: gene lookup, sequence retrieval,

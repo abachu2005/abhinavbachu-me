@@ -39,8 +39,7 @@ export default function LeafCutterDemo({
   const scenario = scenarios[0];
   const sortedHits = useMemo(
     () => [...scenario.hits].sort((a, b) => b.negLog10P - a.negLog10P),
-    [scenario.hits],
-  );
+    [scenario.hits]);
   const defaultHit = sortedHits.find((h) => h.flag === "high-confidence");
   const hit: Hit | undefined =
     sortedHits.find((h) => h.gene === highlightGene) ?? defaultHit;
@@ -82,7 +81,7 @@ export default function LeafCutterDemo({
       >
         <div>
           <h3 style={{ margin: 0, fontFamily: "inherit", fontSize: 16, fontWeight: 600, color: "var(--lc-text)" }}>
-            LeafCutter2 Pipeline
+            LeafMiner Pipeline
           </h3>
           <div style={{ color: "var(--lc-muted)", fontSize: 12 }}>
             Submit junction data, run locally or on Slurm, view results
@@ -93,8 +92,7 @@ export default function LeafCutterDemo({
             "lc-badge",
             phase === "submit" && "lc-badge-queued",
             phase === "running" && "lc-badge-running",
-            (phase === "volcano" || phase === "junction") && "lc-badge-succeeded",
-          )}
+            (phase === "volcano" || phase === "junction") && "lc-badge-succeeded")}
         >
           {phase === "submit"
             ? "ready"
@@ -318,7 +316,7 @@ function JunctionView({
       <p style={{ marginTop: 10, fontSize: 12, color: "var(--lc-muted)" }}>
         The poison exon is the highlighted block. The thick arc skipping it
         is the healthy transcript; the two thinner arcs going through it
-        produce the unstable NMD-target isoform — which is{" "}
+        produce the unstable NMD-target isoform, which is{" "}
         {hit.dPsi >= 0 ? "higher" : "lower"} in {scenario.conditionB} than{" "}
         {scenario.conditionA}.
       </p>

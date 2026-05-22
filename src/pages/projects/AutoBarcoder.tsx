@@ -29,8 +29,8 @@ export default function AutoBarcoder() {
       body: (
         <>
           <p>
-            Biology labs run experiments on plates with 96 little wells —
-            8 rows by 12 columns — each containing a different sample. To
+            Biology labs run experiments on plates with 96 little wells,
+            8 rows by 12 columns, each containing a different sample. To
             save money, they sequence all 96 wells together and get back{" "}
             <em>one giant text file</em> with the reads mixed up.
           </p>
@@ -60,8 +60,7 @@ export default function AutoBarcoder() {
           <Glossary
             term="FASTQ file"
             def="The text format DNA sequencing machines produce. Each line is one short DNA read."
-          />{" "}
-          — every line is one DNA read from the pooled experiment.
+          />{" "}, every line is one DNA read from the pooled experiment.
         </p>
       ),
       advance: "next",
@@ -82,9 +81,8 @@ export default function AutoBarcoder() {
           Each well has a unique pair of{" "}
           <Glossary
             term="barcodes"
-            def="Short DNA tags built into each well. The row barcode tells you which row, the column barcode tells you which column — together they identify the well."
-          />{" "}
-          — one for its row, one for its column. AutoBarcoder uses those
+            def="Short DNA tags built into each well. The row barcode tells you which row, the column barcode tells you which column, together they identify the well."
+          />{" "}, one for its row, one for its column. AutoBarcoder uses those
           tags to route every read to the right well.
         </p>
       ),
@@ -101,13 +99,12 @@ export default function AutoBarcoder() {
       title: "3. Now click Run analysis",
       body: (
         <p>
-          Go ahead — click the highlighted <strong>Run analysis</strong>{" "}
+          Go ahead, click the highlighted <strong>Run analysis</strong>{" "}
           button. The pipeline will demultiplex, cluster with{" "}
           <Glossary
             term="Levenshtein distance"
             def="A measure of how many single-letter edits it takes to turn one short string into another. AutoBarcoder treats reads within a small edit distance as the same barcode."
-          />
-          , and write a summary.
+          />, and write a summary.
         </p>
       ),
       advance: "click",
@@ -147,7 +144,7 @@ export default function AutoBarcoder() {
           <strong style={{ color: "#1f4a2c" }}>Green</strong> wells had clear,
           dominant barcodes.{" "}
           <strong style={{ color: "#7a2222" }}>Red</strong> wells got flagged
-          as contaminated — too few reads or no clear winner.
+          as contaminated, too few reads or no clear winner.
         </p>
       ),
       advance: "next",
@@ -164,7 +161,7 @@ export default function AutoBarcoder() {
       title: `5. Click well ${cleanLabel}`,
       body: (
         <p>
-          Go ahead — click the highlighted well to see what barcodes
+          Go ahead, click the highlighted well to see what barcodes
           AutoBarcoder identified inside it.
         </p>
       ),
@@ -183,7 +180,7 @@ export default function AutoBarcoder() {
       body: (
         <p>
           AutoBarcoder found the top barcode variants in this well and the
-          percentage of reads each one captured — exactly the table a
+          percentage of reads each one captured, exactly the table a
           researcher would copy into their lab notebook.
         </p>
       ),
@@ -220,7 +217,7 @@ export default function AutoBarcoder() {
             body: (
               <p>
                 Not enough confident reads landed here. A researcher would
-                either redo this well or throw it out — but only because
+                either redo this well or throw it out, but only because
                 AutoBarcoder flagged it. Otherwise the noise is invisible.
               </p>
             ),
@@ -238,7 +235,7 @@ export default function AutoBarcoder() {
       body: (
         <p>
           Without AutoBarcoder, a researcher spends an afternoon pivoting
-          raw reads in Excel — and would probably miss the contaminated
+          raw reads in Excel, and would probably miss the contaminated
           wells entirely. AutoBarcoder produces a confident, ranked,
           per-well report and a printable PDF in seconds.
         </p>

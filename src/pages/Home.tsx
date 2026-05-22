@@ -4,7 +4,7 @@ import { projects, talks } from "@/data/projects";
 import { cn } from "@/lib/cn";
 import type { Project } from "@/data/projects";
 
-const PARVEZ_OSS_SLUGS = ["autobarcoder", "leafcutter", "zebrachop"];
+const PARVEZ_OSS_SLUGS = ["autobarcoder", "leafminer", "zebrachop"];
 const NEUROTECH_SLUGS = ["neurotech"];
 const VERACARE_SLUGS = ["veracare"];
 
@@ -19,8 +19,7 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
       to={p.href}
       className={cn(
         "v-surface v-surface-hover v-card v-slide-up group flex flex-col p-6",
-        `v-stagger-${Math.min(i + 1, 6)}`,
-      )}
+        `v-stagger-${Math.min(i + 1, 6)}`)}
     >
       <div className="mb-4 flex items-start justify-between gap-3">
         <h3 className="font-serif text-[1.35rem] leading-tight text-[var(--color-ink)]">
@@ -38,8 +37,7 @@ function ProjectCard({ p, i }: { p: Project; i: number }) {
             className={cn(
               "rounded-full border border-[var(--color-border)] bg-[var(--color-panel)] px-2 py-0.5 text-[0.7rem] font-medium text-[var(--color-ink-muted)]",
               t === "In progress" &&
-                "border-[var(--color-accent-tint)] bg-[var(--color-accent-tint)] text-[var(--color-accent-deep)]",
-            )}
+                "border-[var(--color-accent-tint)] bg-[var(--color-accent-tint)] text-[var(--color-accent-deep)]")}
           >
             {t}
           </span>
@@ -105,7 +103,7 @@ export default function Home() {
           <p className="v-slide-up v-stagger-2 mt-6 max-w-2xl text-lg text-[var(--color-ink-muted)]">
             I build open-source tools for biomedical research and run a startup
             in surgical care. This site is a small museum of the projects I
-            care most about &mdash; click any of them to walk through how they work.
+            care most about. Click any of them to walk through how they work.
           </p>
         </div>
       </section>
@@ -126,7 +124,7 @@ export default function Home() {
 
       <ProjectGroup
         id="veracare"
-        title="Veracare"
+        title="VeraCare"
         description="My startup building AI-assisted surgical care navigation."
         items={veracare}
       />

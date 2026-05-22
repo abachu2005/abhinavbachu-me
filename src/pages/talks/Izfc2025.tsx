@@ -4,26 +4,25 @@ import SlideDeck from "@/components/demo/SlideDeck";
 
 const slideImages = Array.from(
   { length: 17 },
-  (_, i) => `/assets/talks/izfc/slides/slide-${String(i + 1).padStart(2, "0")}.png`,
-);
+  (_, i) => `/assets/talks/izfc/slides/slide-${String(i + 1).padStart(2, "0")}.png`);
 
 const slideCaptions = [
-  "Title — High-throughput gene perturbation and streamlined multimodal phenotyping in zebrafish.",
-  "Exigence — CRISPR is scalable in zebrafish, but phenotyping isn't; most workflows don't link phenotype to genotype.",
-  "Introduction — a scalable pipeline that combines MIC-Drop CRISPR with automated imaging and a plate-wide barcoding system.",
+  "Title: High-throughput gene perturbation and streamlined multimodal phenotyping in zebrafish.",
+  "Exigence: CRISPR is scalable in zebrafish, but phenotyping isn't; most workflows don't link phenotype to genotype.",
+  "Introduction: a scalable pipeline that combines MIC-Drop CRISPR with automated imaging and a plate-wide barcoding system.",
   "Experimental workflow overview.",
-  "MIC-Drop — scalable F0 CRISPR perturbation (Parvez et al. 2021 Science; Parvez, Brandt & Peterson 2023 Nature Protocols).",
-  "MCAM imaging — full 96-well Z-stack in under a minute, 0.9 gigapixels total at 3.2 μm resolution (Thomson et al. 2022 eLife).",
-  "CNN-based morphological segmentation — UNet trained on 7 regions, per-pixel masks evaluated with IoU.",
-  "Morphological metric outputs — tail length, head area, yolk diameter, with plate-wide reproducibility.",
-  "Behavioral assay design — spontaneous and stimulus-based (flash, vibration) with IR tracking and pose estimation.",
-  "Behavioral metric design — baseline and stimulus responses per larva, mutants vs wild-type, t-tests with FDR correction.",
+  "MIC-Drop: scalable F0 CRISPR perturbation (Parvez et al. 2021 Science; Parvez, Brandt & Peterson 2023 Nature Protocols).",
+  "MCAM imaging: full 96-well Z-stack in under a minute, 0.9 gigapixels total at 3.2 μm resolution (Thomson et al. 2022 eLife).",
+  "CNN-based morphological segmentation: UNet trained on 7 regions, per-pixel masks evaluated with IoU.",
+  "Morphological metric outputs: tail length, head area, yolk diameter, with plate-wide reproducibility.",
+  "Behavioral assay design: spontaneous and stimulus-based (flash, vibration) with IR tracking and pose estimation.",
+  "Behavioral metric design: baseline and stimulus responses per larva, mutants vs wild-type, t-tests with FDR correction.",
   "Behavioral fingerprinting.",
-  "Barcode demultiplexing — assigns sequencing reads to wells and outputs the dominant genotype per larva.",
+  "Barcode demultiplexing: assigns sequencing reads to wells and outputs the dominant genotype per larva.",
   "Edit-distance clustering on barcodes.",
   "Genotype–phenotype mapping.",
-  "Discussion — high-throughput, standardized phenotyping; results match manual annotations; compares favorably to DanioVision, VAST, Zebrabox.",
-  "Acknowledgements — Parvez Lab, Ramona Optics, Peterson Lab, CCM & Aquatics Facility, NIH.",
+  "Discussion: high-throughput, standardized phenotyping; results match manual annotations; compares favorably to DanioVision, VAST, Zebrabox.",
+  "Acknowledgements: Parvez Lab, Ramona Optics, Peterson Lab, CCM & Aquatics Facility, NIH.",
   "Questions?",
 ];
 
@@ -58,7 +57,7 @@ export default function Izfc2025() {
       <Section title="Abstract">
         <p>
           CRISPR has made gene editing in zebrafish scalable, but phenotyping
-          hasn&rsquo;t kept up &mdash; morphological and behavioral readouts are
+          hasn&rsquo;t kept up, morphological and behavioral readouts are
           still collected manually or with low-throughput tools, and most
           workflows don&rsquo;t link phenotype directly back to genotype at
           scale.

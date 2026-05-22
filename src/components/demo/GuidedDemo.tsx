@@ -86,8 +86,7 @@ export default function GuidedDemo({ preview, steps, kicker }: GuidedDemoProps) 
                     ? "w-8 bg-[var(--color-accent)]"
                     : n < i
                       ? "w-2 bg-[var(--color-accent-light)]"
-                      : "w-2 bg-[var(--color-border-strong)] hover:bg-[var(--color-ink-subtle)]",
-                )}
+                      : "w-2 bg-[var(--color-border-strong)] hover:bg-[var(--color-ink-subtle)]")}
               />
             ))}
           </div>
@@ -202,8 +201,7 @@ function TourOverlay({
       }
 
       const el = containerRef.current.querySelector(
-        `[data-tour-id="${step.target}"]`,
-      ) as HTMLElement | null;
+        `[data-tour-id="${step.target}"]`) as HTMLElement | null;
 
       if (!el) {
         // DOM may not have mounted yet after onEnter swapped phase; retry.
@@ -256,8 +254,7 @@ function TourOverlay({
       setBlurbSize((prev) =>
         Math.abs(prev.w - r.width) < 1 && Math.abs(prev.h - r.height) < 1
           ? prev
-          : { w: r.width, h: r.height },
-      );
+          : { w: r.width, h: r.height });
     };
     measure();
     const ro = new ResizeObserver(measure);
@@ -269,8 +266,7 @@ function TourOverlay({
   // Responsive blurb width: shrink with container, but keep readable.
   const blurbWidth = Math.max(
     BLURB_MIN_W,
-    Math.min(BLURB_MAX_W, containerSize.w - SAFE_MARGIN * 2),
-  );
+    Math.min(BLURB_MAX_W, containerSize.w - SAFE_MARGIN * 2));
 
   // No target → centered card (intro/outro)
   if (!step.target || !rect) {
@@ -312,8 +308,7 @@ function TourOverlay({
     { w: blurbWidth, h: blurbSize.h },
     step.placement ?? "right",
     containerSize,
-    isMobile,
-  );
+    isMobile);
 
   return (
     <div className="absolute inset-0 z-30">
@@ -434,8 +429,7 @@ function computeBlurbPlacement(
   blurb: Size,
   preferred: "top" | "bottom" | "left" | "right",
   container: Size,
-  isMobile: boolean,
-): { style: CSSProperties } {
+  isMobile: boolean): { style: CSSProperties } {
   const W = blurb.w;
   const H = blurb.h;
   const SW = container.w;
@@ -485,8 +479,7 @@ function computeBlurbPlacement(
         top: clamp(
           cutout.top + cutout.height / 2 - H / 2,
           SAFE_MARGIN,
-          SH - H - SAFE_MARGIN,
-        ),
+          SH - H - SAFE_MARGIN),
       },
     };
   }
@@ -497,8 +490,7 @@ function computeBlurbPlacement(
         top: clamp(
           cutout.top + cutout.height / 2 - H / 2,
           SAFE_MARGIN,
-          SH - H - SAFE_MARGIN,
-        ),
+          SH - H - SAFE_MARGIN),
       },
     };
   }
@@ -508,8 +500,7 @@ function computeBlurbPlacement(
         left: clamp(
           cutout.left + cutout.width / 2 - W / 2,
           SAFE_MARGIN,
-          SW - W - SAFE_MARGIN,
-        ),
+          SW - W - SAFE_MARGIN),
         top: cutout.top - GAP - H,
       },
     };
@@ -520,14 +511,13 @@ function computeBlurbPlacement(
         left: clamp(
           cutout.left + cutout.width / 2 - W / 2,
           SAFE_MARGIN,
-          SW - W - SAFE_MARGIN,
-        ),
+          SW - W - SAFE_MARGIN),
         top: cutout.top + cutout.height + GAP,
       },
     };
   }
 
-  // Nothing fits — fall back to whichever has the most room.
+  // Nothing fits, fall back to whichever has the most room.
   // Prefer pinning to bottom of container above the target if the cutout is
   // near the top, otherwise pin above the cutout.
   const spaceBelow = SH - (cutout.top + cutout.height);
@@ -538,8 +528,7 @@ function computeBlurbPlacement(
         left: clamp(
           cutout.left + cutout.width / 2 - W / 2,
           SAFE_MARGIN,
-          SW - W - SAFE_MARGIN,
-        ),
+          SW - W - SAFE_MARGIN),
         bottom: SAFE_MARGIN,
       },
     };
@@ -549,15 +538,14 @@ function computeBlurbPlacement(
       left: clamp(
         cutout.left + cutout.width / 2 - W / 2,
         SAFE_MARGIN,
-        SW - W - SAFE_MARGIN,
-      ),
+        SW - W - SAFE_MARGIN),
       top: SAFE_MARGIN,
     },
   };
 }
 
 // -----------------------------------------------------------------------------
-// Inline glossary chip — still exported for use inside step bodies
+// Inline glossary chip, still exported for use inside step bodies
 // -----------------------------------------------------------------------------
 
 export function Glossary({
@@ -576,8 +564,7 @@ export function Glossary({
         onBlur={() => setOpen(false)}
         className={cn(
           "inline-flex items-center gap-1 rounded border-b border-dashed border-[var(--color-accent-light)] text-[var(--color-ink)]",
-          "hover:text-[var(--color-accent-deep)]",
-        )}
+          "hover:text-[var(--color-accent-deep)]")}
       >
         {term}
         <HelpCircle className="h-3 w-3 text-[var(--color-accent)]" />

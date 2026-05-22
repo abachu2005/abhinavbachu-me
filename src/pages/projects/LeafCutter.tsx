@@ -24,7 +24,7 @@ export default function LeafCutter() {
         <>
           <p>
             Most cells have a quality-control system that destroys broken
-            RNA before it becomes a faulty protein — it's called{" "}
+            RNA before it becomes a faulty protein. It's called{" "}
             <Glossary
               term="nonsense-mediated decay"
               def="NMD. A cellular safety mechanism that detects broken or premature-stop RNA messages and deletes them before they're translated."
@@ -34,7 +34,7 @@ export default function LeafCutter() {
           <p>
             Cells secretly <em>weaponize</em> this system: they splice in a
             tiny "poison exon" that intentionally trips the alarm, which
-            dials the gene down. Leaf_Cutter finds these poison exons
+            dials the gene down. LeafMiner finds these poison exons
             automatically.
           </p>
         </>
@@ -52,8 +52,8 @@ export default function LeafCutter() {
       title: "Pick a comparison",
       body: (
         <p>
-          The researcher chooses two conditions to compare — here, zebrafish
-          embryos at two developmental time points. Leaf_Cutter handles all
+          The researcher chooses two conditions to compare. Here, zebrafish
+          embryos at two developmental time points. LeafMiner handles all
           the alignment, reference downloads, and junction counting itself.
         </p>
       ),
@@ -70,7 +70,7 @@ export default function LeafCutter() {
       title: "Submit the job",
       body: (
         <p>
-          Click <strong>Submit Job</strong> and Leaf_Cutter starts the
+          Click <strong>Submit Job</strong> and LeafMiner starts the
           pipeline. On the cluster a full ENA project runs for hours; this
           demo finishes in seconds.
         </p>
@@ -87,12 +87,11 @@ export default function LeafCutter() {
       body: (
         <>
           <p>
-            Leaf_Cutter chains five tools: quality-control,{" "}
+            LeafMiner chains five tools: quality-control,{" "}
             <Glossary
               term="STAR alignment"
               def="An RNA-seq read aligner that maps short DNA reads to a reference genome and reports the splice junctions it sees."
-            />
-            , LeafCutter2 junction clustering, productive/unproductive
+            />, LeafCutter2 junction clustering, productive/unproductive
             classification, and a statistical test.
           </p>
           <p>Click Next when the run finishes.</p>
@@ -115,7 +114,7 @@ export default function LeafCutter() {
             Each dot is one gene's candidate poison exon. The x-axis is{" "}
             <Glossary
               term="ΔPSI"
-              def="Change in 'Percent Spliced In' — how much more (or less) the poison exon is included in condition B compared to A."
+              def="Change in 'Percent Spliced In', how much more (or less) the poison exon is included in condition B compared to A."
             />{" "}
             and the y-axis is statistical significance.
           </p>
@@ -139,7 +138,7 @@ export default function LeafCutter() {
       body: hero ? (
         <p>
           This is <strong>{hero.gene}</strong>. Rectangles are exons, arcs
-          are splice junctions. The highlighted exon is the poison one — and
+          are splice junctions. The highlighted exon is the poison one, and
           the cell {hero.dPsi >= 0 ? "includes it more" : "skips it more"}{" "}
           in {scenario.conditionB} than {scenario.conditionA}, dialing the
           gene {hero.dPsi >= 0 ? "down" : "up"}.
@@ -159,8 +158,8 @@ export default function LeafCutter() {
       body: (
         <p>
           Zebrafish have 25,000+ genes. Hand-curating poison exons in a
-          single dataset is a months-long project. Leaf_Cutter shrinks that
-          to a button press — the first publicly available end-to-end tool
+          single dataset is a months-long project. LeafMiner shrinks that
+          to a button press. The first publicly available end-to-end tool
           for it.
         </p>
       ),
@@ -175,21 +174,21 @@ export default function LeafCutter() {
   return (
     <PageShell
       eyebrow="Open source"
-      title="Leaf_Cutter"
-      tagline="Finds hidden “poison exons” in zebrafish RNA-sequencing data, automatically — the first publicly available end-to-end pipeline for it."
+      title="LeafMiner"
+      tagline="Finds hidden “poison exons” in zebrafish RNA-sequencing data, automatically. The first publicly available end-to-end pipeline for it."
       role="Solo developer · lead author"
       timeline="2024 – 2025"
       externalLinks={[
-        { label: "GitHub", href: "https://github.com/abachu2005/Leaf_Cutter" },
+        { label: "GitHub", href: "https://github.com/abachu2005/LeafMiner" },
         { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/1170208699" },
       ]}
     >
       <Section title="What it is, in one paragraph">
         <p>
           Cells sometimes deliberately splice broken-looking RNA so the
-          quality-control machinery destroys it — a clever way to dial a
+          quality-control machinery destroys it: a clever way to dial a
           gene down. The spliced-in fragment is called a "poison exon."
-          Leaf_Cutter is an end-to-end pipeline that finds these in
+          LeafMiner is an end-to-end pipeline that finds these in
           zebrafish RNA-seq data automatically, runs the statistics, and
           ranks the hits for the wet lab. Goes from an ENA project ID to a
           ready-to-screen candidate list with no human in the loop.

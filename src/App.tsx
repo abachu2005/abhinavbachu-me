@@ -44,6 +44,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/projects/autobarcoder" element={<AutoBarcoder />} />
+            <Route path="/projects/leafminer" element={<LeafCutter />} />
             <Route path="/projects/leafcutter" element={<LeafCutter />} />
             <Route path="/projects/zebrachop" element={<ZebraCHOP />} />
             <Route
@@ -52,10 +53,10 @@ export default function App() {
                 <PasswordGate
                   storageKey="veracare-unlocked"
                   passwordHash={VERACARE_PASSWORD_HASH}
-                  label="Veracare · private preview"
+                  label="VeraCare · private preview"
                   blurb={
                     <p>
-                      The Veracare walkthrough contains confidential product
+                      The VeraCare walkthrough contains confidential product
                       and clinical-workflow details. If you&rsquo;ve received
                       the access password in my application, enter it below.
                     </p>

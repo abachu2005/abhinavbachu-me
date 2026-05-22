@@ -19,7 +19,7 @@ export default function Veracare() {
       body: (
         <>
           <p>
-            We'll walk the product as <strong>Maria Alvarez</strong> — 62,
+            We'll walk the product as <strong>Maria Alvarez</strong>, 62,
             screening colonoscopy in 28 days, on warfarin. VeraCare's voice
             calls deliver the education, SMS carries the conversation, and
             this web app is the companion you can return to whenever you want.
@@ -39,7 +39,7 @@ export default function Veracare() {
       title: "1. Always-on text line",
       body: (
         <p>
-          One number across the whole product — Maria texts this number, the
+          One number across the whole product, Maria texts this number, the
           AI assistant or a nurse texts her back from this number, the voice
           call comes from this number.
         </p>
@@ -51,11 +51,11 @@ export default function Veracare() {
       id: "procedure-card",
       target: "vc-procedure-card",
       placement: "right",
-      title: "2. One card per procedure — click it",
+      title: "2. One card per procedure, click it",
       body: (
         <p>
           The progress bar tracks{" "}
-          <em>which AI-voice modules she's listened to</em> — it doesn't gate
+          <em>which AI-voice modules she's listened to</em>, it doesn't gate
           anything. Click the card to open her procedure.
         </p>
       ),
@@ -74,7 +74,7 @@ export default function Veracare() {
           On enrollment we{" "}
           <Glossary
             term="FHIR-pull"
-            def="The Fast Healthcare Interoperability Resources protocol. We use it to read Maria's appointment, meds, allergies, and active problems directly from her clinic's Epic chart — no double-entry, no clipboard."
+            def="The Fast Healthcare Interoperability Resources protocol. We use it to read Maria's appointment, meds, allergies, and active problems directly from her clinic's Epic chart, no double-entry, no clipboard."
           />{" "}
           her chart, so the date, the suite, and the surgeon already match
           what's in her Epic record.
@@ -108,7 +108,7 @@ export default function Veracare() {
         <p>
           The system already knows the prep module is the one she hasn't
           listened to. It will <strong>call her Saturday at 10am</strong> with
-          the script — and offers it inline if she wants it now.
+          the script, and offers it inline if she wants it now.
         </p>
       ),
       advance: "next",
@@ -140,7 +140,7 @@ export default function Veracare() {
       title: "7. Click the initial consult summary",
       body: (
         <p>
-          Go ahead — click the highlighted card. This was authored entirely
+          Go ahead, click the highlighted card. This was authored entirely
           from her Epic chart; nothing for the clinic to write up.
         </p>
       ),
@@ -152,7 +152,7 @@ export default function Veracare() {
       title: "8. The consultation summary",
       body: (
         <p>
-          Reason for recommendation, key findings, agreed plan, planned CPT —
+          Reason for recommendation, key findings, agreed plan, planned CPT,
           straight from Epic via FHIR. Maria gets a real summary; the clinic
           doesn't have to write one.
         </p>
@@ -174,7 +174,7 @@ export default function Veracare() {
             term="intent classifier"
             def="A lightweight DistilBERT fine-tune that runs in front of the LLM. Classifies inbound SMS into {logistics, med-question, red-flag, smalltalk, opt-out}. Red-flag → straight to nurse, no LLM in the path."
           />
-          . If Maria texts any of these post-op, a nurse is paged — the
+          . If Maria texts any of these post-op, a nurse is paged, the
           assistant doesn't decide whether to escalate.
         </p>
       ),
@@ -191,7 +191,7 @@ export default function Veracare() {
       body: (
         <p>
           Every answer ships with a chip that opens the exact source paragraph.
-          The agent literally cannot answer without a source — that's the
+          The agent literally cannot answer without a source, that's the
           property that makes the system safe to run without a
           nurse-in-the-loop on every reply.
         </p>
@@ -238,7 +238,7 @@ export default function Veracare() {
       title: "13. The compiled journey · click the prep call",
       body: (
         <p>
-          A read-only timeline of every touchpoint. Generated, not edited —
+          A read-only timeline of every touchpoint. Generated, not edited,
           this comes straight from the patient's compiled journey instance.
           Click the prep call to open it on the platform.
         </p>
@@ -256,7 +256,7 @@ export default function Veracare() {
       body: (
         <p>
           The voice call <em>is</em> this module. Whatever the AI voice said on
-          the call is on this page, fully personalized — her warfarin date, her
+          the call is on this page, fully personalized, her warfarin date, her
           SUPREP regimen, Elena as her escort. Listen again in any of 5
           languages; no login required from the SMS link.
         </p>
@@ -287,7 +287,7 @@ export default function Veracare() {
       body: (
         <p>
           The chip below the answer opens the exact paragraph the agent pulled
-          from — Prep §2 in this case. The agent literally cannot answer without
+          from, Prep §2 in this case. The agent literally cannot answer without
           a source; that's what makes it safe to run without a
           nurse-in-the-loop on every reply.
         </p>
@@ -335,7 +335,7 @@ export default function Veracare() {
       body: (
         <p>
           Below the tour is Maria's actual SMS thread, in iMessage. Tap the
-          blue send button to advance her side — the agent (and Nurse Whitman,
+          blue send button to advance her side, the agent (and Nurse Whitman,
           in green, when it escalates) reply automatically through the same
           number.{" "}
           <strong>One thread per patient. That's the product.</strong>
@@ -364,7 +364,7 @@ export default function Veracare() {
           over, and a small companion web app for revisiting modules, saving
           questions, or printing a pre-op summary. The backend is 8 LLM-driven
           agents + 4 specialized models on top of an event-sourced data plane.
-          The defensible moat isn't the LLM — it's the labeled longitudinal
+          The defensible moat isn't the LLM, it's the labeled longitudinal
           signal that compounds per-clinic per-procedure.
         </p>
       </Section>

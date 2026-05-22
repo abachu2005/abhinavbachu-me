@@ -189,7 +189,7 @@ function ScreenMock({ phase }: { phase: VeracarePhase }) {
 }
 
 // ============================================================================
-// Design primitives — v1 magic-aesthetic
+// Design primitives, v1 magic-aesthetic
 // ============================================================================
 
 function VcCard({
@@ -349,7 +349,7 @@ function DashboardMock() {
             Need help now?
           </p>
           <p style={{ fontSize: 11.5, color: "#334155", margin: "1px 0 0" }}>
-            For urgent medical issues, call 911 or text us — same number as the office.
+            For urgent medical issues, call 911 or text us, same number as the office.
           </p>
         </div>
         <span style={{ fontSize: 11.5, fontWeight: 500, color: "#3B4FD8" }}>
@@ -468,7 +468,7 @@ function JourneyTimelineMock() {
         </div>
         <p style={{ fontSize: 11.5, color: "#475569", margin: 0, lineHeight: 1.5 }}>
           Most of your prep happens by <strong>voice call + text</strong>. This page is a read-only
-          reference — re-listen to anything you missed, no login required from the link in your texts.
+          reference, re-listen to anything you missed, no login required from the link in your texts.
         </p>
       </VcCard>
 
@@ -557,7 +557,7 @@ function JourneyTimelineMock() {
 }
 
 // ============================================================================
-// Procedure detail — v1 layout, ungated modules, no locked consent
+// Procedure detail, v1 layout, ungated modules, no locked consent
 // ============================================================================
 
 function ProcedureMock() {
@@ -623,7 +623,7 @@ function ProcedureMock() {
               </span>
             </div>
 
-            {/* Ungated module row — every dot accessible, no padlocks */}
+            {/* Ungated module row, every dot accessible, no padlocks */}
             <div data-tour-id="vc-module-row" style={{ display: "flex", alignItems: "center", padding: "0 4px" }}>
               {preOpModules.map((m, idx) => {
                 const isCompleted = m.status === "completed";
@@ -765,7 +765,7 @@ function ProcedureMock() {
               <Eyebrow>Ask the team</Eyebrow>
             </div>
             <p style={{ fontSize: 11.5, color: "#475569", margin: "0 0 10px" }}>
-              Same number as your texts. Answered by the assistant or a nurse — your reply lands in one thread.
+              Same number as your texts. Answered by the assistant or a nurse, your reply lands in one thread.
             </p>
             <div
               style={{
@@ -822,7 +822,7 @@ function ProcedureMock() {
 }
 
 // ============================================================================
-// Prep module — v1 module page: streaming text + right-docked chatbot
+// Prep module, v1 module page: streaming text + right-docked chatbot
 // ============================================================================
 
 function PrepModuleMock() {
@@ -912,23 +912,22 @@ function ModulePageColumn() {
           }}
         >
           <p style={{ margin: 0 }}>
-            Hi Maria — this is your prep walkthrough for your colonoscopy on{" "}
+            Hi Maria, this is your prep walkthrough for your colonoscopy on{" "}
             <strong style={{ color: "#0F1F3D" }}>Saturday, March 14th</strong>. The most
             important part is what you do in the{" "}
             <span style={{ background: "#dbeafe", padding: "0 3px", borderRadius: 3, fontWeight: 600 }}>
               24 hours before
-            </span>{" "}
-            — so let's walk through it together.
+            </span>{" "}, so let's walk through it together.
           </p>
           <p style={{ marginTop: 10 }}>
             <strong style={{ color: "#0F1F3D" }}>Medications.</strong> Per Dr. Patel,
-            your warfarin should already be paused — last dose was Saturday March 8th.
+            your warfarin should already be paused, last dose was Saturday March 8th.
             Your blood pressure medication (lisinopril) is fine to take the morning of,
             with a small sip of water.
           </p>
           <p style={{ marginTop: 10 }}>
             <strong style={{ color: "#0F1F3D" }}>Fasting.</strong> Nothing by mouth after
-            midnight Friday — no water, coffee, juice, gum, or mints. We know it's a long
+            midnight Friday, no water, coffee, juice, gum, or mints. We know it's a long
             stretch; that's why we schedule colonoscopies in the morning.
           </p>
           <p style={{ marginTop: 10 }}>
@@ -938,18 +937,18 @@ function ModulePageColumn() {
               Friday at 6pm
             </span>
             : mix the 6oz bottle with water to the 16oz line, drink within 15 minutes,
-            then 32oz of water over the next hour. Dose 2 is at 4am Saturday — same mix,
+            then 32oz of water over the next hour. Dose 2 is at 4am Saturday, same mix,
             same way. We'll text you when it's time.
           </p>
           <p style={{ marginTop: 10 }}>
             <strong style={{ color: "#0F1F3D" }}>Day-of logistics.</strong> Arrive at
-            8:30am, room 200. Elena is confirmed as your escort — she'll need to come
+            8:30am, room 200. Elena is confirmed as your escort, she'll need to come
             into the building with you at check-in, and she's the one who drives you home
             afterward.
           </p>
           <p style={{ marginTop: 10, color: "#475569", fontStyle: "italic" }}>
             That's the whole prep. If anything feels off the day before, just text us at
-            this same number — someone's always on. Talk to you Friday.
+            this same number, someone's always on. Talk to you Friday.
           </p>
         </div>
 
@@ -1085,7 +1084,7 @@ function ChatbotDockColumn() {
               lineHeight: 1.45,
             }}
           >
-            <strong>No coffee</strong> after midnight Thursday — that includes black
+            <strong>No coffee</strong> after midnight Thursday, that includes black
             coffee and tea. Water and clear liquids are also out once SUPREP dose 1
             starts at 6pm Friday.
             <div
@@ -1178,7 +1177,7 @@ function ChatbotDockColumn() {
 
 
 // ============================================================================
-// Risks module — v1 layout (kept intact)
+// Risks module, v1 layout (kept intact)
 // ============================================================================
 
 function RisksModuleMock() {
@@ -1237,7 +1236,7 @@ function RisksModuleMock() {
               margin: 0,
             }}
           >
-            Red flags — call your care team immediately
+            Red flags, call your care team immediately
           </p>
         </div>
         <ul style={{ margin: 0, padding: "0 0 0 18px", color: "#7f1d1d", fontSize: 11.5, lineHeight: 1.6 }}>
@@ -1312,7 +1311,7 @@ function QaMock() {
         />
         <p style={{ fontSize: 12.5, color: "#0F1F3D", margin: 0, lineHeight: 1.55 }}>
           You'll need a <strong>responsible adult to drive you home</strong> after the
-          procedure — Uber and Lyft alone are not permitted. They should also come into
+          procedure, Uber and Lyft alone are not permitted. They should also come into
           the building with you at check-in.
         </p>
 
@@ -1383,7 +1382,7 @@ function QaMock() {
         </div>
       </div>
       <p style={{ fontSize: 10.5, color: "#94a3b8", margin: 0, fontStyle: "italic" }}>
-        This is the same agent that texts Maria — same conversation, three windows (SMS, in-app, voicemail transcripts).
+        This is the same agent that texts Maria, same conversation, three windows (SMS, in-app, voicemail transcripts).
       </p>
     </div>
   );
@@ -1637,7 +1636,7 @@ function SummaryMock() {
 }
 
 // ============================================================================
-// Compiler visualization — styled in v1 cards
+// Compiler visualization, styled in v1 cards
 // ============================================================================
 
 function CompilerMock() {
@@ -1732,7 +1731,7 @@ function CompilerMock() {
       </VcCard>
 
       <p style={{ fontSize: 10.5, color: "#94a3b8", margin: 0, lineHeight: 1.5 }}>
-        Every runtime agent reads the compiled instance — no agent invents schedule on its own.
+        Every runtime agent reads the compiled instance, no agent invents schedule on its own.
         That's the property that makes the system auditable, deterministic over inputs, and easy
         to onboard a new procedure or clinic to.
       </p>
@@ -1741,7 +1740,7 @@ function CompilerMock() {
 }
 
 // ============================================================================
-// Template authoring — v1-card styled
+// Template authoring, v1-card styled
 // ============================================================================
 
 function TemplateAuthoringMock() {
@@ -1862,7 +1861,7 @@ function TemplateAuthoringMock() {
 }
 
 // ============================================================================
-// Provider dashboard — v1 patient table
+// Provider dashboard, v1 patient table
 // ============================================================================
 
 function ProviderDashboardMock() {
@@ -1979,7 +1978,7 @@ function ProviderDashboardMock() {
         </div>
       </VcCard>
       <p style={{ fontSize: 10.5, color: "#94a3b8", margin: 0 }}>
-        Patients flagged <em>needs review</em> have missed teach-back replies, high Q&amp;A volume, or low listen-progress — the morning queue surfaces who to call, when, and why.
+        Patients flagged <em>needs review</em> have missed teach-back replies, high Q&amp;A volume, or low listen-progress, the morning queue surfaces who to call, when, and why.
       </p>
     </div>
   );

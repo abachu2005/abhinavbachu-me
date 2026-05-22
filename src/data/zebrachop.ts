@@ -1,5 +1,5 @@
 // Demo data for ZebraCHOP. The guides below are the *actual* top-ranked
-// guides from ZebraCHOP/results/{rx3,tbx16,tbxta}.tsv — real output of the
+// guides from ZebraCHOP/results/{rx3,tbx16,tbxta}.tsv, real output of the
 // pipeline running against the danRer11 zebrafish reference.
 
 export type Guide = {
@@ -23,7 +23,7 @@ export type GeneRun = {
   chrom: string;
   /** A simple stylized gene model: list of exon widths (relative units) */
   exons: number[];
-  /** Which exon (0-indexed) is the recommended target — usually an early one */
+  /** Which exon (0-indexed) is the recommended target, usually an early one */
   targetExon: number;
   guides: Guide[];
 };
@@ -32,7 +32,7 @@ export const genes: GeneRun[] = [
   {
     id: "rx3",
     symbol: "rx3",
-    description: "Retinal homeobox gene 3 — early eye-field specification.",
+    description: "Retinal homeobox gene 3, early eye-field specification.",
     chrom: "chr21",
     exons: [1.2, 1.6, 0.8, 1.1, 0.9],
     targetExon: 1,
@@ -49,7 +49,7 @@ export const genes: GeneRun[] = [
   {
     id: "tbx16",
     symbol: "tbx16",
-    description: "T-box transcription factor 16 — mesoderm specification.",
+    description: "T-box transcription factor 16, mesoderm specification.",
     chrom: "chr8",
     exons: [0.9, 1.4, 1.1, 0.6, 1.2, 0.7],
     targetExon: 1,
@@ -66,7 +66,7 @@ export const genes: GeneRun[] = [
   {
     id: "tbxta",
     symbol: "tbxta",
-    description: "T-box transcription factor TA (no tail) — notochord and tail.",
+    description: "T-box transcription factor TA (no tail), notochord and tail.",
     chrom: "chr19",
     exons: [1.0, 1.5, 0.9, 1.2, 0.8],
     targetExon: 1,

@@ -69,7 +69,7 @@ export default function MesDemo({ phase, highlightTrial = null }: MesDemoProps) 
               color: "var(--mes-text)",
             }}
           >
-            MES — Motor Engagement Signal
+            MES, Motor Engagement Signal
           </h3>
           <div style={{ color: "var(--mes-muted)", fontSize: 12, marginTop: 2 }}>
             EEG → per-trial engagement score · {scenario.config.channels}-ch · {scenario.config.sampleRate} Hz
@@ -80,8 +80,7 @@ export default function MesDemo({ phase, highlightTrial = null }: MesDemoProps) 
             "mes-badge",
             phase === "input" && "mes-badge-idle",
             phase === "running" && "mes-badge-running",
-            (phase === "gauge" || phase === "topo") && "mes-badge-done",
-          )}
+            (phase === "gauge" || phase === "topo") && "mes-badge-done")}
         >
           {phase === "input" ? "idle" : phase === "running" ? "running" : "done"}
         </span>
@@ -123,9 +122,9 @@ function InputView({ scenario }: { scenario: (typeof scenarios)[number] }) {
           <label className="mes-label">Task</label>
           <select className="mes-select" defaultValue="right_hand" data-tour-id="mes-task">
             <option value="right_hand">{scenario.config.task}</option>
-            <option value="left_hand">Left hand — motor imagery</option>
-            <option value="feet">Feet — motor imagery</option>
-            <option value="gait">Gait — motor imagery</option>
+            <option value="left_hand">Left hand, motor imagery</option>
+            <option value="feet">Feet, motor imagery</option>
+            <option value="gait">Gait, motor imagery</option>
           </select>
         </div>
         <div>
@@ -416,7 +415,7 @@ function TopoView({ scenario }: { scenario: (typeof scenarios)[number] }) {
             }}
           >
             +1 = full contralateral dominance, −1 = ipsilateral.
-            Right-hand imagery should drive the <b>left</b> motor strip — and it does.
+            Right-hand imagery should drive the <b>left</b> motor strip, and it does.
           </p>
         </div>
       </div>

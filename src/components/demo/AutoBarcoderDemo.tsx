@@ -49,8 +49,7 @@ export default function AutoBarcoderDemo({
     if (!highlightWell) return null;
     return (
       scenario.wells.find(
-        (w) => w.row === highlightWell.row && w.col === highlightWell.col,
-      ) ?? null
+        (w) => w.row === highlightWell.row && w.col === highlightWell.col) ?? null
     );
   }, [highlightWell, scenario.wells]);
 
@@ -86,8 +85,7 @@ export default function AutoBarcoderDemo({
           className={cn(
             "ab-pill",
             phase === "running" && "ab-pill-running",
-            phase === "results" && "ab-pill-done",
-          )}
+            phase === "results" && "ab-pill-done")}
         >
           {phase === "input" ? "idle" : phase === "running" ? "running" : "done"}
         </span>
@@ -136,7 +134,7 @@ function InputView({
         data-tour-id="ab-file"
       >
         <div style={{ color: "var(--ab-text)", fontSize: 12.5 }}>
-          sample_reads.txt — {scenario.totalReads} reads
+          sample_reads.txt, {scenario.totalReads} reads
         </div>
       </div>
 
@@ -324,7 +322,7 @@ function ResultsView({
           return (
             <div
               key={`${w.row}-${w.col}`}
-              title={`${w.row} × ${w.col} — ${w.totalReads} reads`}
+              title={`${w.row} × ${w.col}, ${w.totalReads} reads`}
               data-tour-id={`ab-well-${label}`}
               style={{
                 aspectRatio: "1 / 1",
@@ -392,12 +390,12 @@ function ResultsView({
           </div>
           {highlighted.flag === "low-coverage" ? (
             <i style={{ color: "var(--ab-muted)" }}>
-              contaminated — no high-confidence barcodes
+              contaminated, no high-confidence barcodes
             </i>
           ) : (
             highlighted.variants.map((v) => (
               <div key={v.seq}>
-                {v.seq} — {v.pct.toFixed(2)}%
+                {v.seq}, {v.pct.toFixed(2)}%
               </div>
             ))
           )}
