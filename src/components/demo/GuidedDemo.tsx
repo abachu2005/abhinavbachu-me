@@ -104,7 +104,7 @@ export default function GuidedDemo({ preview, steps, kicker }: GuidedDemoProps) 
       {/* The demo with overlay */}
       <div
         ref={containerRef}
-        className="relative max-h-[min(520px,70vh)] overflow-x-hidden overflow-y-auto rounded-xl"
+        className="relative overflow-hidden rounded-xl"
       >
         {preview}
         <TourOverlay
