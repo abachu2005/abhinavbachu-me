@@ -111,7 +111,7 @@ export default function Home() {
       <ProjectGroup
         id="parvez-lab-oss"
         title="Parvez Lab OSS"
-        description="Open-source bioinformatics tools I built in the Parvez Lab — all three are on PyPI (v1.0.2), with bioconda recipes under review."
+        description="Open-source bioinformatics tools I built in the Parvez Lab. All three are on PyPI (v1.0.2), with bioconda recipes under review."
         items={parvezOss}
       />
 

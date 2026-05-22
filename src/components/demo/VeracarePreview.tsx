@@ -28,6 +28,7 @@ import {
   preOpModules,
   providerPatients,
 } from "@/data/veracare";
+import ColonoscopyAnimation from "@/components/demo/ColonoscopyAnimation";
 import {
   compileHistory,
   maria,
@@ -54,7 +55,17 @@ export type VeracarePhase =
 // Frame
 // ============================================================================
 
-export default function VeracarePreview({ phase }: { phase: VeracarePhase }) {
+type VeracarePreviewProps = {
+  phase: VeracarePhase;
+  procedureAnimationOpen?: boolean;
+  onToggleProcedureAnimation?: () => void;
+};
+
+export default function VeracarePreview({
+  phase,
+  procedureAnimationOpen = false,
+  onToggleProcedureAnimation,
+}: VeracarePreviewProps) {
   const isProvider = phase === "provider" || phase === "template-authoring";
   return (
     <div
@@ -78,7 +89,11 @@ export default function VeracarePreview({ phase }: { phase: VeracarePhase }) {
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.22 }}
           >
-            <ScreenMock phase={phase} />
+            <ScreenMock
+              phase={phase}
+              procedureAnimationOpen={procedureAnimationOpen}
+              onToggleProcedureAnimation={onToggleProcedureAnimation}
+            />
           </motion.div>
         </AnimatePresence>
       </div>
@@ -159,7 +174,15 @@ function TopNav({ isProvider }: { isProvider: boolean }) {
   );
 }
 
-function ScreenMock({ phase }: { phase: VeracarePhase }) {
+function ScreenMock({
+  phase,
+  procedureAnimationOpen,
+  onToggleProcedureAnimation,
+}: {
+  phase: VeracarePhase;
+  procedureAnimationOpen?: boolean;
+  onToggleProcedureAnimation?: () => void;
+}) {
   switch (phase) {
     case "dashboard":
       return <DashboardMock />;
@@ -168,7 +191,12 @@ function ScreenMock({ phase }: { phase: VeracarePhase }) {
     case "procedure":
       return <ProcedureMock />;
     case "module-prep":
-      return <PrepModuleMock />;
+      return (
+        <PrepModuleMock
+          procedureAnimationOpen={procedureAnimationOpen ?? false}
+          onToggleProcedureAnimation={onToggleProcedureAnimation}
+        />
+      );
     case "module-risks":
       return <RisksModuleMock />;
     case "qa":
@@ -825,16 +853,31 @@ function ProcedureMock() {
 // Prep module, v1 module page: streaming text + right-docked chatbot
 // ============================================================================
 
-function PrepModuleMock() {
+function PrepModuleMock({
+  procedureAnimationOpen,
+  onToggleProcedureAnimation,
+}: {
+  procedureAnimationOpen: boolean;
+  onToggleProcedureAnimation?: () => void;
+}) {
   return (
     <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 1.6fr) minmax(280px, 320px)", gap: 14, alignItems: "start" }}>
-      <ModulePageColumn />
+      <ModulePageColumn
+        procedureAnimationOpen={procedureAnimationOpen}
+        onToggleProcedureAnimation={onToggleProcedureAnimation}
+      />
       <ChatbotDockColumn />
     </div>
   );
 }
 
-function ModulePageColumn() {
+function ModulePageColumn({
+  procedureAnimationOpen,
+  onToggleProcedureAnimation,
+}: {
+  procedureAnimationOpen: boolean;
+  onToggleProcedureAnimation?: () => void;
+}) {
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
       {/* Breadcrumb */}
@@ -912,13 +955,45 @@ function ModulePageColumn() {
           }}
         >
           <p style={{ margin: 0 }}>
-            Hi Maria, this is your prep walkthrough for your colonoscopy on{" "}
+            Hi Maria, this is your prep walkthrough for your{" "}
+            <button
+              type="button"
+              data-tour-id="vc-procedure-term"
+              onClick={() => onToggleProcedureAnimation?.()}
+              aria-expanded={procedureAnimationOpen}
+              aria-label="What is a colonoscopy?"
+              style={{
+                background: procedureAnimationOpen ? "#dbeafe" : "rgba(59,79,216,0.08)",
+                color: "#1d4ed8",
+                border: 0,
+                padding: "0 5px",
+                borderRadius: 4,
+                font: "inherit",
+                fontWeight: 600,
+                cursor: "pointer",
+                textDecoration: "underline",
+                textDecorationStyle: "dotted",
+                textUnderlineOffset: 3,
+                textDecorationColor: "#93c5fd",
+              }}
+            >
+              colonoscopy
+            </button>{" "}
+            on{" "}
             <strong style={{ color: "#0F1F3D" }}>Saturday, March 14th</strong>. The most
             important part is what you do in the{" "}
             <span style={{ background: "#dbeafe", padding: "0 3px", borderRadius: 3, fontWeight: 600 }}>
               24 hours before
             </span>{" "}, so let's walk through it together.
           </p>
+          <AnimatePresence initial={false}>
+            {procedureAnimationOpen && (
+              <ColonoscopyAnimation
+                key="colonoscopy-animation"
+                onClose={() => onToggleProcedureAnimation?.()}
+              />
+            )}
+          </AnimatePresence>
           <p style={{ marginTop: 10 }}>
             <strong style={{ color: "#0F1F3D" }}>Medications.</strong> Per Dr. Patel,
             your warfarin should already be paused, last dose was Saturday March 8th.

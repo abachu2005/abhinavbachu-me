@@ -11,6 +11,12 @@ import IMessageThread from "@/components/demo/iMessageThread";
 
 export default function Veracare() {
   const [phase, setPhase] = useState<VeracarePhase>("dashboard");
+  const [procedureAnimationOpen, setProcedureAnimationOpen] = useState(false);
+
+  const enterPrep = (openAnimation: boolean) => {
+    setPhase("module-prep");
+    setProcedureAnimationOpen(openAnimation);
+  };
 
   const steps: GuideStep[] = [
     {
@@ -262,8 +268,46 @@ export default function Veracare() {
         </p>
       ),
       advance: "next",
-      onEnter: () => setPhase("module-prep"),
+      onEnter: () => enterPrep(false),
     },
+
+    // -- The moment from the personal statement ----------------------------
+    {
+      id: "procedure-term",
+      target: "vc-procedure-term",
+      placement: "right",
+      title: "Tap the highlighted word",
+      body: (
+        <p>
+          The first patient to use VeraCare paused on a procedure term and
+          tapped it. A short animation showed what was actually about to
+          happen, and her expression changed as she followed it. When it
+          finished, she said, <em>"oh, so they're not cutting me open."</em>{" "}
+          She'd spent a week bracing for a surgery she was never going to have.
+          Try it now.
+        </p>
+      ),
+      advance: "click",
+      onEnter: () => enterPrep(false),
+    },
+    {
+      id: "procedure-animation",
+      target: "vc-procedure-term",
+      placement: "right",
+      title: "That moment, in code",
+      body: (
+        <p>
+          This is the moment that taught me what a perioperative companion is
+          supposed to do. A patient should never have to carry a procedure home
+          without knowing what it actually is. The animation lives wherever a
+          procedure term shows up, in modules, in chat answers, in the prep
+          call transcript.
+        </p>
+      ),
+      advance: "next",
+      onEnter: () => enterPrep(true),
+    },
+
     {
       id: "chatbot-dock",
       target: "vc-chatbot-dock",
@@ -277,7 +321,7 @@ export default function Veracare() {
         </p>
       ),
       advance: "next",
-      onEnter: () => setPhase("module-prep"),
+      onEnter: () => enterPrep(false),
     },
     {
       id: "chat-citation",
@@ -293,7 +337,7 @@ export default function Veracare() {
         </p>
       ),
       advance: "next",
-      onEnter: () => setPhase("module-prep"),
+      onEnter: () => enterPrep(false),
     },
 
     // -- Provider -----------------------------------------------------------
@@ -372,7 +416,15 @@ export default function Veracare() {
       <Section title="Demo · Maria's journey">
         <GuidedDemo
           kicker="Guided walkthrough"
-          preview={<VeracarePreview phase={phase} />}
+          preview={
+            <VeracarePreview
+              phase={phase}
+              procedureAnimationOpen={procedureAnimationOpen}
+              onToggleProcedureAnimation={() =>
+                setProcedureAnimationOpen((v) => !v)
+              }
+            />
+          }
           steps={steps}
         />
       </Section>
