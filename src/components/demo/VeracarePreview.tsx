@@ -947,8 +947,8 @@ function ModulePageColumn({
           data-tour-id="vc-module-text"
           style={{
             padding: "16px 18px",
-            maxHeight: 320,
-            overflowY: "auto",
+            maxHeight: procedureAnimationOpen ? undefined : 320,
+            overflowY: procedureAnimationOpen ? "visible" : "auto",
             color: "#1e293b",
             fontSize: 13,
             lineHeight: 1.65,

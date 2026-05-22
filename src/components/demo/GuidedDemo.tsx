@@ -395,9 +395,9 @@ function TourOverlay({
           transition={{ duration: 0.18 }}
           className="absolute z-40"
           style={{
-            ...placement.style,
             width: blurbWidth,
             maxWidth: `calc(100% - ${SAFE_MARGIN * 2}px)`,
+            ...placement.style,
           }}
         >
           <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-4 shadow-[var(--shadow-soft-lg)]">
@@ -435,22 +435,33 @@ function computeBlurbPlacement(
   const SW = container.w;
   const SH = container.h;
 
-  // Mobile: always pin to the top of the container so the blurb never
-  // covers the highlighted element and never gets clipped sideways.
+  // Mobile: pin to whichever edge (top/bottom) has enough room for the blurb.
+  // If neither has room (a tall card filling the panel), fall through to the
+  // corner fallback below so the blurb shrinks and tucks into one corner.
   if (isMobile) {
-    const cutoutCovers =
-      cutout.top < SH * 0.45 && cutout.top + cutout.height > SH * 0.15;
-    return {
-      style: {
-        left: SAFE_MARGIN,
-        right: SAFE_MARGIN,
-        // If the target is near the top, push the blurb to the bottom; otherwise top.
-        ...(cutoutCovers
-          ? { bottom: SAFE_MARGIN }
-          : { top: SAFE_MARGIN }),
-        width: "auto",
-      },
-    };
+    const spaceAbove = cutout.top - GAP - SAFE_MARGIN;
+    const spaceBelow = SH - (cutout.top + cutout.height) - GAP - SAFE_MARGIN;
+    if (spaceAbove >= H && spaceAbove >= spaceBelow) {
+      return {
+        style: {
+          left: SAFE_MARGIN,
+          right: SAFE_MARGIN,
+          top: SAFE_MARGIN,
+          width: "auto",
+        },
+      };
+    }
+    if (spaceBelow >= H) {
+      return {
+        style: {
+          left: SAFE_MARGIN,
+          right: SAFE_MARGIN,
+          bottom: SAFE_MARGIN,
+          width: "auto",
+        },
+      };
+    }
+    // else: fall through to the corner fallback at the end of this function.
   }
 
   const fits = {
@@ -517,29 +528,37 @@ function computeBlurbPlacement(
     };
   }
 
-  // Nothing fits, fall back to whichever has the most room.
-  // Prefer pinning to bottom of container above the target if the cutout is
-  // near the top, otherwise pin above the cutout.
-  const spaceBelow = SH - (cutout.top + cutout.height);
-  const spaceAbove = cutout.top;
-  if (spaceBelow >= spaceAbove) {
-    return {
-      style: {
-        left: clamp(
-          cutout.left + cutout.width / 2 - W / 2,
-          SAFE_MARGIN,
-          SW - W - SAFE_MARGIN),
-        bottom: SAFE_MARGIN,
-      },
-    };
+  // Nothing fits beside the target: the target nearly fills the panel.
+  // Pin the blurb to the panel corner that's farthest from the target's
+  // center, and shrink its width so it only nicks one corner of the
+  // highlight, leaving the rest of the pulsing ring visible.
+  const NARROW_W = Math.min(W, 232);
+  const cx = cutout.left + cutout.width / 2;
+  const cy = cutout.top + cutout.height / 2;
+  const corners = [
+    { hx: "left" as const, hy: "top" as const, x: SAFE_MARGIN, y: SAFE_MARGIN },
+    { hx: "right" as const, hy: "top" as const, x: SW - SAFE_MARGIN, y: SAFE_MARGIN },
+    { hx: "left" as const, hy: "bottom" as const, x: SAFE_MARGIN, y: SH - SAFE_MARGIN },
+    { hx: "right" as const, hy: "bottom" as const, x: SW - SAFE_MARGIN, y: SH - SAFE_MARGIN },
+  ];
+  let best = corners[0];
+  let bestD = -1;
+  for (const c of corners) {
+    const d = (c.x - cx) ** 2 + (c.y - cy) ** 2;
+    if (d > bestD) {
+      bestD = d;
+      best = c;
+    }
   }
   return {
     style: {
-      left: clamp(
-        cutout.left + cutout.width / 2 - W / 2,
-        SAFE_MARGIN,
-        SW - W - SAFE_MARGIN),
-      top: SAFE_MARGIN,
+      ...(best.hx === "left"
+        ? { left: SAFE_MARGIN }
+        : { right: SAFE_MARGIN }),
+      ...(best.hy === "top"
+        ? { top: SAFE_MARGIN }
+        : { bottom: SAFE_MARGIN }),
+      width: NARROW_W,
     },
   };
 }
