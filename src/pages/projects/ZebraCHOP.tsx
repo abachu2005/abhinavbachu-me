@@ -126,7 +126,7 @@ export default function ZebraCHOP() {
     {
       id: "switch-tbx16",
       target: "zc-tab-tbx16",
-      placement: "bottom",
+      placement: "top",
       title: "Click tbx16 to switch genes",
       body: (
         <p>

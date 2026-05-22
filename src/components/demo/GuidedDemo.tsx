@@ -73,7 +73,7 @@ export default function GuidedDemo({ preview, steps, kicker }: GuidedDemoProps) 
           </span>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex gap-1">
+          <div className="hidden gap-1 sm:flex">
             {steps.map((_, n) => (
               <button
                 key={n}
@@ -103,7 +103,10 @@ export default function GuidedDemo({ preview, steps, kicker }: GuidedDemoProps) 
       </div>
 
       {/* The demo with overlay */}
-      <div ref={containerRef} className="relative overflow-hidden rounded-xl">
+      <div
+        ref={containerRef}
+        className="relative max-h-[min(520px,70vh)] overflow-x-hidden overflow-y-auto rounded-xl"
+      >
         {preview}
         <TourOverlay
           containerRef={containerRef}
@@ -158,6 +161,13 @@ export default function GuidedDemo({ preview, steps, kicker }: GuidedDemoProps) 
 // -----------------------------------------------------------------------------
 
 type Rect = { left: number; top: number; width: number; height: number };
+type Size = { w: number; h: number };
+
+const BLURB_MAX_W = 288;
+const BLURB_MIN_W = 240;
+const MOBILE_BREAKPOINT = 520;
+const GAP = 14;
+const SAFE_MARGIN = 12;
 
 function TourOverlay({
   containerRef,
@@ -168,11 +178,10 @@ function TourOverlay({
   step: GuideStep;
   onAdvance: () => void;
 }) {
+  const blurbRef = useRef<HTMLDivElement>(null);
   const [rect, setRect] = useState<Rect | null>(null);
-  const [containerSize, setContainerSize] = useState<{ w: number; h: number }>({
-    w: 0,
-    h: 0,
-  });
+  const [containerSize, setContainerSize] = useState<Size>({ w: 0, h: 0 });
+  const [blurbSize, setBlurbSize] = useState<Size>({ w: BLURB_MAX_W, h: 160 });
 
   // Recompute target rect whenever step or container changes.
   useLayoutEffect(() => {
@@ -206,10 +215,14 @@ function TourOverlay({
         return;
       }
 
+      // Keep the target in view inside scrollable demo panels.
+      el.scrollIntoView({ block: "nearest", inline: "nearest" });
+
       const tr = el.getBoundingClientRect();
+      const cr2 = containerRef.current!.getBoundingClientRect();
       setRect({
-        left: tr.left - cr.left,
-        top: tr.top - cr.top,
+        left: tr.left - cr2.left,
+        top: tr.top - cr2.top,
         width: tr.width,
         height: tr.height,
       });
@@ -233,7 +246,33 @@ function TourOverlay({
     };
   }, [step.id, step.target, containerRef]);
 
-  // No target → centered card
+  // Measure the blurb itself so placement uses real dimensions.
+  useLayoutEffect(() => {
+    if (!blurbRef.current) return;
+    const measure = () => {
+      const el = blurbRef.current;
+      if (!el) return;
+      const r = el.getBoundingClientRect();
+      setBlurbSize((prev) =>
+        Math.abs(prev.w - r.width) < 1 && Math.abs(prev.h - r.height) < 1
+          ? prev
+          : { w: r.width, h: r.height },
+      );
+    };
+    measure();
+    const ro = new ResizeObserver(measure);
+    ro.observe(blurbRef.current);
+    return () => ro.disconnect();
+  }, [step.id, step.target, containerSize.w, containerSize.h]);
+
+  const isMobile = containerSize.w > 0 && containerSize.w < MOBILE_BREAKPOINT;
+  // Responsive blurb width: shrink with container, but keep readable.
+  const blurbWidth = Math.max(
+    BLURB_MIN_W,
+    Math.min(BLURB_MAX_W, containerSize.w - SAFE_MARGIN * 2),
+  );
+
+  // No target → centered card (intro/outro)
   if (!step.target || !rect) {
     return (
       <div className="absolute inset-0 z-30 flex items-center justify-center bg-[rgba(15,24,32,0.42)] backdrop-blur-[1px]">
@@ -266,21 +305,25 @@ function TourOverlay({
     width: rect.width + PAD * 2,
     height: rect.height + PAD * 2,
   };
-  const blurbStyle = computeBlurbPosition(
+
+  // Decide whether to anchor the blurb or fall back to a centered/edge card.
+  const placement = computeBlurbPlacement(
     cutout,
+    { w: blurbWidth, h: blurbSize.h },
     step.placement ?? "right",
     containerSize,
+    isMobile,
   );
 
   return (
     <div className="absolute inset-0 z-30">
       {/* Four dimmer panels surrounding the cutout, blocking clicks elsewhere */}
       <div
-        className="absolute bg-[rgba(15,24,32,0.42)]"
+        className="absolute z-10 bg-[rgba(15,24,32,0.45)]"
         style={{ left: 0, top: 0, width: "100%", height: cutout.top }}
       />
       <div
-        className="absolute bg-[rgba(15,24,32,0.42)]"
+        className="absolute z-10 bg-[rgba(15,24,32,0.45)]"
         style={{
           left: 0,
           top: cutout.top,
@@ -289,7 +332,7 @@ function TourOverlay({
         }}
       />
       <div
-        className="absolute bg-[rgba(15,24,32,0.42)]"
+        className="absolute z-10 bg-[rgba(15,24,32,0.45)]"
         style={{
           left: cutout.left + cutout.width,
           top: cutout.top,
@@ -298,7 +341,7 @@ function TourOverlay({
         }}
       />
       <div
-        className="absolute bg-[rgba(15,24,32,0.42)]"
+        className="absolute z-10 bg-[rgba(15,24,32,0.45)]"
         style={{
           left: 0,
           top: cutout.top + cutout.height,
@@ -309,7 +352,7 @@ function TourOverlay({
 
       {/* Pulsing ring around target */}
       <motion.div
-        className="pointer-events-none absolute rounded-md"
+        className="pointer-events-none absolute z-20 rounded-md"
         style={{
           left: cutout.left,
           top: cutout.top,
@@ -334,7 +377,7 @@ function TourOverlay({
           type="button"
           onClick={onAdvance}
           aria-label="Advance tour"
-          className="absolute cursor-pointer rounded-md"
+          className="absolute z-20 cursor-pointer rounded-md"
           style={{
             left: cutout.left,
             top: cutout.top,
@@ -350,14 +393,19 @@ function TourOverlay({
       <AnimatePresence mode="wait">
         <motion.div
           key={step.id}
+          ref={blurbRef}
           initial={{ opacity: 0, y: 4 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -2 }}
           transition={{ duration: 0.18 }}
-          className="absolute"
-          style={blurbStyle}
+          className="absolute z-40"
+          style={{
+            ...placement.style,
+            width: blurbWidth,
+            maxWidth: `calc(100% - ${SAFE_MARGIN * 2}px)`,
+          }}
         >
-          <div className="w-72 rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-4 shadow-[var(--shadow-soft-lg)]">
+          <div className="rounded-xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-4 shadow-[var(--shadow-soft-lg)]">
             <h4 className="font-serif text-base leading-tight text-[var(--color-ink)]">
               {step.title}
             </h4>
@@ -377,55 +425,134 @@ function TourOverlay({
   );
 }
 
-function computeBlurbPosition(
+// -----------------------------------------------------------------------------
+// Placement
+// -----------------------------------------------------------------------------
+
+function computeBlurbPlacement(
   cutout: Rect,
+  blurb: Size,
   preferred: "top" | "bottom" | "left" | "right",
-  size: { w: number; h: number },
-): CSSProperties {
-  const W = 288; // 18rem
-  const H_EST = 160;
-  const GAP = 14;
+  container: Size,
+  isMobile: boolean,
+): { style: CSSProperties } {
+  const W = blurb.w;
+  const H = blurb.h;
+  const SW = container.w;
+  const SH = container.h;
+
+  // Mobile: always pin to the top of the container so the blurb never
+  // covers the highlighted element and never gets clipped sideways.
+  if (isMobile) {
+    const cutoutCovers =
+      cutout.top < SH * 0.45 && cutout.top + cutout.height > SH * 0.15;
+    return {
+      style: {
+        left: SAFE_MARGIN,
+        right: SAFE_MARGIN,
+        // If the target is near the top, push the blurb to the bottom; otherwise top.
+        ...(cutoutCovers
+          ? { bottom: SAFE_MARGIN }
+          : { top: SAFE_MARGIN }),
+        width: "auto",
+      },
+    };
+  }
 
   const fits = {
-    right: cutout.left + cutout.width + GAP + W <= size.w,
-    left: cutout.left - GAP - W >= 0,
-    bottom: cutout.top + cutout.height + GAP + H_EST <= size.h,
-    top: cutout.top - GAP - H_EST >= 0,
+    right: cutout.left + cutout.width + GAP + W + SAFE_MARGIN <= SW,
+    left: cutout.left - GAP - W - SAFE_MARGIN >= 0,
+    bottom: cutout.top + cutout.height + GAP + H + SAFE_MARGIN <= SH,
+    top: cutout.top - GAP - H - SAFE_MARGIN >= 0,
   };
 
   const order: Array<"right" | "left" | "bottom" | "top"> = [
     preferred,
-    "right",
     "bottom",
-    "left",
+    "right",
     "top",
+    "left",
   ];
-  const p = order.find((x) => fits[x]) ?? preferred;
+  const chosen = order.find((x) => fits[x]);
 
-  const clamp = (v: number, max: number) =>
-    Math.max(8, Math.min(v, max - 8));
+  const clamp = (v: number, min: number, max: number) =>
+    Math.max(min, Math.min(v, max));
 
-  if (p === "right") {
+  if (chosen === "right") {
     return {
-      left: cutout.left + cutout.width + GAP,
-      top: clamp(cutout.top + cutout.height / 2 - 60, size.h - H_EST),
+      style: {
+        left: cutout.left + cutout.width + GAP,
+        top: clamp(
+          cutout.top + cutout.height / 2 - H / 2,
+          SAFE_MARGIN,
+          SH - H - SAFE_MARGIN,
+        ),
+      },
     };
   }
-  if (p === "left") {
+  if (chosen === "left") {
     return {
-      left: cutout.left - GAP - W,
-      top: clamp(cutout.top + cutout.height / 2 - 60, size.h - H_EST),
+      style: {
+        left: cutout.left - GAP - W,
+        top: clamp(
+          cutout.top + cutout.height / 2 - H / 2,
+          SAFE_MARGIN,
+          SH - H - SAFE_MARGIN,
+        ),
+      },
     };
   }
-  if (p === "top") {
+  if (chosen === "top") {
     return {
-      left: clamp(cutout.left + cutout.width / 2 - W / 2, size.w - W),
-      top: Math.max(8, cutout.top - GAP - H_EST),
+      style: {
+        left: clamp(
+          cutout.left + cutout.width / 2 - W / 2,
+          SAFE_MARGIN,
+          SW - W - SAFE_MARGIN,
+        ),
+        top: cutout.top - GAP - H,
+      },
+    };
+  }
+  if (chosen === "bottom") {
+    return {
+      style: {
+        left: clamp(
+          cutout.left + cutout.width / 2 - W / 2,
+          SAFE_MARGIN,
+          SW - W - SAFE_MARGIN,
+        ),
+        top: cutout.top + cutout.height + GAP,
+      },
+    };
+  }
+
+  // Nothing fits — fall back to whichever has the most room.
+  // Prefer pinning to bottom of container above the target if the cutout is
+  // near the top, otherwise pin above the cutout.
+  const spaceBelow = SH - (cutout.top + cutout.height);
+  const spaceAbove = cutout.top;
+  if (spaceBelow >= spaceAbove) {
+    return {
+      style: {
+        left: clamp(
+          cutout.left + cutout.width / 2 - W / 2,
+          SAFE_MARGIN,
+          SW - W - SAFE_MARGIN,
+        ),
+        bottom: SAFE_MARGIN,
+      },
     };
   }
   return {
-    left: clamp(cutout.left + cutout.width / 2 - W / 2, size.w - W),
-    top: cutout.top + cutout.height + GAP,
+    style: {
+      left: clamp(
+        cutout.left + cutout.width / 2 - W / 2,
+        SAFE_MARGIN,
+        SW - W - SAFE_MARGIN,
+      ),
+      top: SAFE_MARGIN,
+    },
   };
 }
 

@@ -39,7 +39,7 @@ export default function Neurotech() {
     {
       id: "upload",
       target: "mes-file",
-      placement: "bottom",
+      placement: "top",
       title: "1. Drop in a recording",
       body: (
         <p>
@@ -61,7 +61,7 @@ export default function Neurotech() {
     {
       id: "task",
       target: "mes-task",
-      placement: "bottom",
+      placement: "top",
       title: "2. Pick the task",
       body: (
         <p>

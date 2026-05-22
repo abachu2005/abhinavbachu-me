@@ -48,7 +48,7 @@ export default function LeafCutter() {
     {
       id: "comparison",
       target: "lc-comparison",
-      placement: "right",
+      placement: "top",
       title: "Pick a comparison",
       body: (
         <p>

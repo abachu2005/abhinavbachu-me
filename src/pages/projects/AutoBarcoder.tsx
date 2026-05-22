@@ -52,7 +52,7 @@ export default function AutoBarcoder() {
     {
       id: "file",
       target: "ab-file",
-      placement: "bottom",
+      placement: "top",
       title: "1. The user uploads a sequencing file",
       body: (
         <p>
@@ -75,7 +75,7 @@ export default function AutoBarcoder() {
     {
       id: "barcodes",
       target: "ab-barcodes",
-      placement: "bottom",
+      placement: "top",
       title: "2. Then pastes the well IDs",
       body: (
         <p>
@@ -97,7 +97,7 @@ export default function AutoBarcoder() {
     {
       id: "run",
       target: "ab-run-btn",
-      placement: "right",
+      placement: "top",
       title: "3. Now click Run analysis",
       body: (
         <p>
@@ -139,7 +139,7 @@ export default function AutoBarcoder() {
     {
       id: "grid",
       target: "ab-grid",
-      placement: "right",
+      placement: "top",
       title: "4. The output: a colored map of the plate",
       body: (
         <p>

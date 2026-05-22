@@ -167,7 +167,7 @@ export default function Home() {
         <h2 className="mb-4">Contact</h2>
         <p className="max-w-2xl text-[var(--color-ink-muted)]">
           Reach me at{" "}
-          <a href="mailto:hello@abhinavbachu.me">hello@abhinavbachu.me</a> or
+          <a href="mailto:abhinav.bachu.med@gmail.com">abhinav.bachu.med@gmail.com</a> or
           on <a href="https://github.com/abachu2005" target="_blank" rel="noreferrer">GitHub</a>.
         </p>
       </section>
