@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { ArrowUpRight } from "lucide-react";
+import type { ReactNode } from "react";
+import { ArrowUpRight, ExternalLink } from "lucide-react";
 import { projects, talks } from "@/data/projects";
 import { cn } from "@/lib/cn";
 import type { Project } from "@/data/projects";
@@ -52,11 +53,13 @@ function ProjectGroup({
   title,
   description,
   items,
+  headerExtra,
 }: {
   id: string;
   title: string;
   description?: string;
   items: Project[];
+  headerExtra?: ReactNode;
 }) {
   if (items.length === 0) return null;
   return (
@@ -69,6 +72,7 @@ function ProjectGroup({
               {description}
             </p>
           )}
+          {headerExtra}
         </div>
         <p className="shrink-0 text-sm text-[var(--color-ink-muted)]">
           {items.length} {items.length === 1 ? "project" : "projects"}
@@ -127,6 +131,17 @@ export default function Home() {
         title="VeraCare"
         description="My startup building AI-assisted surgical care navigation."
         items={veracare}
+        headerExtra={
+          <a
+            href="https://tryveracare.com"
+            target="_blank"
+            rel="noreferrer"
+            className="mt-3 inline-flex items-center gap-1.5 rounded-lg border border-[var(--color-accent)] bg-[var(--color-accent-tint)] px-3.5 py-1.5 text-sm font-medium text-[var(--color-accent-deep)] shadow-[var(--shadow-soft)] transition-colors hover:bg-[var(--color-accent)] hover:text-white"
+          >
+            tryveracare.com
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+        }
       />
 
       {/* IZFC */}

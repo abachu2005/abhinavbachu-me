@@ -11,6 +11,8 @@ export type PageShellProps = {
   role?: string;
   timeline?: string;
   externalLinks?: ExternalLinkItem[];
+  /** Style header external links as prominent pill buttons. */
+  prominentExternalLinks?: boolean;
   children: ReactNode;
 };
 
@@ -21,6 +23,7 @@ export default function PageShell({
   role,
   timeline,
   externalLinks,
+  prominentExternalLinks = false,
   children,
 }: PageShellProps) {
   return (
@@ -60,7 +63,11 @@ export default function PageShell({
                 href={l.href}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center gap-1 text-[var(--color-accent)] hover:text-[var(--color-accent-deep)]"
+                className={
+                  prominentExternalLinks
+                    ? "inline-flex items-center gap-1.5 rounded-lg border border-[var(--color-accent)] bg-[var(--color-accent-tint)] px-3.5 py-1.5 font-medium text-[var(--color-accent-deep)] shadow-[var(--shadow-soft)] transition-colors hover:bg-[var(--color-accent)] hover:text-white"
+                    : "inline-flex items-center gap-1 text-[var(--color-accent)] hover:text-[var(--color-accent-deep)]"
+                }
               >
                 {l.label}
                 <ExternalLink className="h-3 w-3" />

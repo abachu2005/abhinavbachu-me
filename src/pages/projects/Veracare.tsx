@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { ExternalLink } from "lucide-react";
 import PageShell, { Section } from "@/components/layout/PageShell";
 import PasswordGate from "@/components/layout/PasswordGate";
 import GuidedDemo, {
@@ -402,7 +403,30 @@ export default function Veracare() {
       role="Founder · engineering lead"
       timeline="2025 – present"
       externalLinks={[{ label: "tryveracare.com", href: "https://tryveracare.com" }]}
+      prominentExternalLinks
     >
+      <div className="rounded-2xl border border-[var(--color-accent)]/25 bg-[var(--color-accent-tint)]/50 p-5 shadow-[var(--shadow-soft)] sm:p-6">
+        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--color-accent-deep)]">
+          Live product website
+        </p>
+        <p className="mt-2 font-serif text-xl text-[var(--color-ink)] sm:text-[1.35rem]">
+          Visit VeraCare at tryveracare.com
+        </p>
+        <p className="mt-2 max-w-2xl text-sm leading-relaxed text-[var(--color-ink-muted)]">
+          Our public site for clinics, partners, and anyone who wants to see
+          what we are building outside this portfolio walkthrough.
+        </p>
+        <a
+          href="https://tryveracare.com"
+          target="_blank"
+          rel="noreferrer"
+          className="mt-4 inline-flex items-center gap-2 rounded-lg bg-[var(--color-accent)] px-4 py-2.5 text-sm font-medium text-white shadow-[var(--shadow-soft)] transition-colors hover:bg-[var(--color-accent-deep)]"
+        >
+          Open tryveracare.com
+          <ExternalLink className="h-4 w-4" />
+        </a>
+      </div>
+
       <Section title="What it is">
         <p>
           VeraCare is a healthcare startup I co-founded. We replace the
@@ -414,16 +438,7 @@ export default function Veracare() {
           questions, or printing a pre-op summary. The backend is 8 LLM-driven
           agents + 4 specialized models on top of an event-sourced data plane.
           The defensible moat isn't the LLM, it's the labeled longitudinal
-          signal that compounds per-clinic per-procedure. Learn more at{" "}
-          <a
-            href="https://tryveracare.com"
-            target="_blank"
-            rel="noreferrer"
-            className="text-[var(--color-accent)] hover:text-[var(--color-accent-deep)]"
-          >
-            tryveracare.com
-          </a>
-          .
+          signal that compounds per-clinic per-procedure.
         </p>
       </Section>
 
