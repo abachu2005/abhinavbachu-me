@@ -17,7 +17,7 @@
   <text x="100" y="380" font-family="Inter, sans-serif" font-size="26" fill="#0F1B17">a startup in surgical care, and a path to medical school.</text>
   <g transform="translate(100, 470)" font-family="Inter, sans-serif" font-size="20" fill="#1F4D3F">
     <text x="0" y="0" font-weight="500">AutoBarcoder</text>
-    <text x="220" y="0" font-weight="500">LeafCutter</text>
+    <text x="220" y="0" font-weight="500">LeafMiner</text>
     <text x="430" y="0" font-weight="500">ZebraCHOP</text>
     <text x="640" y="0" font-weight="500">VeraCare</text>
     <text x="810" y="0" font-weight="500">Neurotech</text>

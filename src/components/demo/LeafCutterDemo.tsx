@@ -81,7 +81,7 @@ export default function LeafCutterDemo({
       >
         <div>
           <h3 style={{ margin: 0, fontFamily: "inherit", fontSize: 16, fontWeight: 600, color: "var(--lc-text)" }}>
-            LeafCutter Pipeline
+            LeafMiner Pipeline
           </h3>
           <div style={{ color: "var(--lc-muted)", fontSize: 12 }}>
             Submit junction data, run locally or on Slurm, view results
