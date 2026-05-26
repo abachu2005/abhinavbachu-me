@@ -1,5 +1,6 @@
 import { useState } from "react";
 import PageShell, { Section } from "@/components/layout/PageShell";
+import PasswordGate from "@/components/layout/PasswordGate";
 import GuidedDemo, {
   Glossary,
   type GuideStep,
@@ -8,6 +9,9 @@ import VeracarePreview, {
   type VeracarePhase,
 } from "@/components/demo/VeracarePreview";
 import IMessageThread from "@/components/demo/iMessageThread";
+
+const VERACARE_PASSWORD_HASH =
+  "4e76c530ba2df616a564046bbba6cd40f11dd9f6385defed7d87f6a426c10225";
 
 export default function Veracare() {
   const [phase, setPhase] = useState<VeracarePhase>("dashboard");
@@ -397,6 +401,7 @@ export default function Veracare() {
       tagline="A closed-loop adherence + risk system for surgical care navigation. Voice calls deliver the education, SMS carries the conversation, and a Patient Journey Compiler keeps every patient's schedule personally anchored."
       role="Founder · engineering lead"
       timeline="2025 – present"
+      externalLinks={[{ label: "tryveracare.com", href: "https://tryveracare.com" }]}
     >
       <Section title="What it is">
         <p>
@@ -409,28 +414,61 @@ export default function Veracare() {
           questions, or printing a pre-op summary. The backend is 8 LLM-driven
           agents + 4 specialized models on top of an event-sourced data plane.
           The defensible moat isn't the LLM, it's the labeled longitudinal
-          signal that compounds per-clinic per-procedure.
+          signal that compounds per-clinic per-procedure. Learn more at{" "}
+          <a
+            href="https://tryveracare.com"
+            target="_blank"
+            rel="noreferrer"
+            className="text-[var(--color-accent)] hover:text-[var(--color-accent-deep)]"
+          >
+            tryveracare.com
+          </a>
+          .
         </p>
       </Section>
 
       <Section title="Demo · Maria's journey">
-        <GuidedDemo
-          kicker="Guided walkthrough"
-          preview={
-            <VeracarePreview
-              phase={phase}
-              procedureAnimationOpen={procedureAnimationOpen}
-              onToggleProcedureAnimation={() =>
-                setProcedureAnimationOpen((v) => !v)
-              }
-            />
+        <PasswordGate
+          inline
+          storageKey="veracare-unlocked"
+          passwordHash={VERACARE_PASSWORD_HASH}
+          label="Private demo preview"
+          blurb={
+            <p>
+              The interactive walkthrough and SMS mock contain confidential
+              product and clinical-workflow details. If you&rsquo;ve received
+              the access password in my application, enter it below to unlock
+              the demos.
+            </p>
           }
-          steps={steps}
-        />
+        >
+          <GuidedDemo
+            kicker="Guided walkthrough"
+            preview={
+              <VeracarePreview
+                phase={phase}
+                procedureAnimationOpen={procedureAnimationOpen}
+                onToggleProcedureAnimation={() =>
+                  setProcedureAnimationOpen((v) => !v)
+                }
+              />
+            }
+            steps={steps}
+          />
+        </PasswordGate>
       </Section>
 
       <Section title="The conversation">
-        <IMessageThread />
+        <PasswordGate
+          inline
+          storageKey="veracare-unlocked"
+          passwordHash={VERACARE_PASSWORD_HASH}
+          label="Private demo preview"
+          blurb={null}
+          hideFormWhenLocked
+        >
+          <IMessageThread />
+        </PasswordGate>
       </Section>
     </PageShell>
   );

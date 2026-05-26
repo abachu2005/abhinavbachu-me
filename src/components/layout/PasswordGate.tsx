@@ -9,6 +9,10 @@ type PasswordGateProps = {
   /** Short label used in the gate header. */
   label: string;
   blurb?: ReactNode;
+  /** When true, render a compact gate card instead of replacing the page. */
+  inline?: boolean;
+  /** When locked, render nothing (for secondary gated blocks sharing a key). */
+  hideFormWhenLocked?: boolean;
   children: ReactNode;
 };
 
@@ -25,6 +29,8 @@ export default function PasswordGate({
   passwordHash,
   label,
   blurb,
+  inline = false,
+  hideFormWhenLocked = false,
   children,
 }: PasswordGateProps) {
   const [unlocked, setUnlocked] = useState<boolean>(false);
@@ -75,61 +81,82 @@ export default function PasswordGate({
     return <>{children}</>;
   }
 
+  const formId = inline ? "gate-password-inline" : "gate-password";
+
+  const gateCard = (
+    <div
+      className={
+        inline
+          ? "rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6 shadow-[var(--shadow-soft)]"
+          : "mx-auto max-w-md rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6 shadow-[var(--shadow-soft)]"
+      }
+    >
+      <div className="mb-5 flex items-center gap-2 text-sm text-[var(--color-ink-muted)]">
+        <Lock className="h-4 w-4 text-[var(--color-accent)]" />
+        <span>{inline ? label : "Password required"}</span>
+      </div>
+
+      {blurb && (
+        <div className="mb-5 text-sm leading-relaxed text-[var(--color-ink-muted)]">
+          {blurb}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="space-y-3">
+        <label htmlFor={formId} className="sr-only">
+          Password
+        </label>
+        <input
+          id={formId}
+          type="password"
+          autoComplete="current-password"
+          autoFocus={!inline}
+          value={value}
+          onChange={(e) => {
+            setValue(e.target.value);
+            if (error) setError(null);
+          }}
+          placeholder="Access password"
+          className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-[var(--color-ink)] outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent-tint)]"
+        />
+        {error && (
+          <p role="alert" className="text-sm text-red-600">
+            {error}
+          </p>
+        )}
+        <button
+          type="submit"
+          disabled={busy || !value}
+          className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[var(--color-accent)] px-3.5 py-2 text-sm font-medium text-white shadow-[var(--shadow-soft)] transition-colors hover:bg-[var(--color-accent-deep)] disabled:opacity-40 disabled:hover:bg-[var(--color-accent)]"
+        >
+          {busy ? "Checking…" : "Unlock demo"}
+        </button>
+      </form>
+
+      <p className="mt-4 text-xs text-[var(--color-ink-subtle)]">
+        Access remains unlocked for this browser session.
+      </p>
+    </div>
+  );
+
+  if (inline) {
+    if (hideFormWhenLocked) {
+      return (
+        <p className="text-sm text-[var(--color-ink-subtle)]">
+          Unlock the demo above to view this section.
+        </p>
+      );
+    }
+    return gateCard;
+  }
+
   return (
     <PageShell
       eyebrow={label}
       title="This page is private"
       tagline="Enter the access password to continue."
     >
-      <div className="mx-auto max-w-md">
-        <div className="rounded-2xl border border-[var(--color-border)] bg-[var(--color-bg-elevated)] p-6 shadow-[var(--shadow-soft)]">
-          <div className="mb-5 flex items-center gap-2 text-sm text-[var(--color-ink-muted)]">
-            <Lock className="h-4 w-4 text-[var(--color-accent)]" />
-            <span>Password required</span>
-          </div>
-
-          {blurb && (
-            <div className="mb-5 text-sm leading-relaxed text-[var(--color-ink-muted)]">
-              {blurb}
-            </div>
-          )}
-
-          <form onSubmit={handleSubmit} className="space-y-3">
-            <label htmlFor="gate-password" className="sr-only">
-              Password
-            </label>
-            <input
-              id="gate-password"
-              type="password"
-              autoComplete="current-password"
-              autoFocus
-              value={value}
-              onChange={(e) => {
-                setValue(e.target.value);
-                if (error) setError(null);
-              }}
-              placeholder="Access password"
-              className="w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-[var(--color-ink)] outline-none transition-colors focus:border-[var(--color-accent)] focus:ring-2 focus:ring-[var(--color-accent-tint)]"
-            />
-            {error && (
-              <p role="alert" className="text-sm text-red-600">
-                {error}
-              </p>
-            )}
-            <button
-              type="submit"
-              disabled={busy || !value}
-              className="inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-[var(--color-accent)] px-3.5 py-2 text-sm font-medium text-white shadow-[var(--shadow-soft)] transition-colors hover:bg-[var(--color-accent-deep)] disabled:opacity-40 disabled:hover:bg-[var(--color-accent)]"
-            >
-              {busy ? "Checking…" : "Unlock"}
-            </button>
-          </form>
-
-          <p className="mt-4 text-xs text-[var(--color-ink-subtle)]">
-            Access remains unlocked for this browser session.
-          </p>
-        </div>
-      </div>
+      {gateCard}
     </PageShell>
   );
 }
