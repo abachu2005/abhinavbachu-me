@@ -26,18 +26,18 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "leafminer",
-    name: "LeafMiner",
-    tagline: "End-to-end alternative-splicing pipeline with built-in clustering and scoring.",
+    slug: "leafcutter",
+    name: "LeafCutter",
+    tagline: "End-to-end poison-exon discovery pipeline for zebrafish RNA-seq.",
     oneLiner:
-      "Open-source pipeline that detects differentially spliced junctions across conditions, from raw alignments to ranked hits.",
-    href: "/projects/leafminer",
+      "Open-source pipeline (Leaf_Cutter on Zenodo) that detects differentially spliced junctions across conditions, from raw alignments to ranked poison-exon hits.",
+    href: "/projects/leafcutter",
     tags: ["Open source", "Bioinformatics", "Python", "PyPI", "Pipeline"],
     status: "live",
     external: [
       { label: "GitHub", href: "https://github.com/abachu2005/Leaf_Cutter" },
       { label: "PyPI", href: "https://pypi.org/project/leafcutter2-pipeline/" },
-      { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/1170208699" },
+      { label: "Zenodo DOI", href: "https://zenodo.org/records/20320839" },
     ],
   },
   {

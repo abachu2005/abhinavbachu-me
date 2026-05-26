@@ -4,7 +4,7 @@ import { projects, talks } from "@/data/projects";
 import { cn } from "@/lib/cn";
 import type { Project } from "@/data/projects";
 
-const PARVEZ_OSS_SLUGS = ["autobarcoder", "leafminer", "zebrachop"];
+const PARVEZ_OSS_SLUGS = ["autobarcoder", "leafcutter", "zebrachop"];
 const NEUROTECH_SLUGS = ["neurotech"];
 const VERACARE_SLUGS = ["veracare"];
 

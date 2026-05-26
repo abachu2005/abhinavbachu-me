@@ -1,4 +1,4 @@
-// Demo scenarios for LeafMiner.
+// Demo scenarios for LeafCutter.
 // Shape mirrors the real pipeline output: per-gene poison-exon hits with
 // developmental PSI change (delta-PSI) and adjusted p-value. Gene symbols
 // are pulled from the actual LongORF_PTC+_fromClustered.tsv catalog.
