@@ -35,7 +35,7 @@ export const projects: Project[] = [
     tags: ["Open source", "Bioinformatics", "Python", "PyPI", "Pipeline"],
     status: "live",
     external: [
-      { label: "GitHub", href: "https://github.com/abachu2005/Leaf_Cutter" },
+      { label: "GitHub", href: "https://github.com/abachu2005/LeafMiner" },
       { label: "PyPI", href: "https://pypi.org/project/leafcutter2-pipeline/" },
       { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/1170208699" },
     ],

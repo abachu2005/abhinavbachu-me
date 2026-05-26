@@ -180,7 +180,7 @@ export default function LeafCutter() {
       role="Solo developer · lead author"
       timeline="2024 – 2025"
       externalLinks={[
-        { label: "GitHub", href: "https://github.com/abachu2005/Leaf_Cutter" },
+        { label: "GitHub", href: "https://github.com/abachu2005/LeafMiner" },
         { label: "PyPI", href: "https://pypi.org/project/leafcutter2-pipeline/" },
         { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/1170208699" },
       ]}
