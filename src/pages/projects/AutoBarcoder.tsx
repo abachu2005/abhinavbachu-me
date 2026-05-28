@@ -261,7 +261,7 @@ export default function AutoBarcoder() {
       externalLinks={[
         { label: "GitHub", href: "https://github.com/abachu2005/AutoBarcoder-OS-" },
         { label: "PyPI", href: "https://pypi.org/project/autobarcoder/" },
-        { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/929581836" },
+        { label: "Zenodo DOI", href: "https://doi.org/10.5281/zenodo.20297748" },
       ]}
     >
       <Section title="What it is, in one paragraph">

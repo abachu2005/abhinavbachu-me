@@ -193,7 +193,7 @@ export default function ZebraCHOP() {
       externalLinks={[
         { label: "GitHub", href: "https://github.com/abachu2005/ZebraCHOP" },
         { label: "PyPI", href: "https://pypi.org/project/zebrachop/" },
-        { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/1129378260" },
+        { label: "Zenodo DOI", href: "https://doi.org/10.5281/zenodo.20297752" },
       ]}
     >
       <Section title="What it is, in one paragraph">

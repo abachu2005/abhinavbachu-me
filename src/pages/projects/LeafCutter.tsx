@@ -182,7 +182,7 @@ export default function LeafCutter() {
       externalLinks={[
         { label: "GitHub", href: "https://github.com/abachu2005/LeafMiner" },
         { label: "PyPI", href: "https://pypi.org/project/leafcutter2-pipeline/" },
-        { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/1170208699" },
+        { label: "Zenodo DOI", href: "https://doi.org/10.5281/zenodo.20297750" },
       ]}
     >
       <Section title="What it is, in one paragraph">

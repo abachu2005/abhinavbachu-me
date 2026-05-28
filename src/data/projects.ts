@@ -22,7 +22,7 @@ export const projects: Project[] = [
     external: [
       { label: "GitHub", href: "https://github.com/abachu2005/AutoBarcoder-OS-" },
       { label: "PyPI", href: "https://pypi.org/project/autobarcoder/" },
-      { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/929581836" },
+      { label: "Zenodo DOI", href: "https://doi.org/10.5281/zenodo.20297748" },
     ],
   },
   {
@@ -37,7 +37,7 @@ export const projects: Project[] = [
     external: [
       { label: "GitHub", href: "https://github.com/abachu2005/LeafMiner" },
       { label: "PyPI", href: "https://pypi.org/project/leafcutter2-pipeline/" },
-      { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/1170208699" },
+      { label: "Zenodo DOI", href: "https://doi.org/10.5281/zenodo.20297750" },
     ],
   },
   {
@@ -52,7 +52,7 @@ export const projects: Project[] = [
     external: [
       { label: "GitHub", href: "https://github.com/abachu2005/ZebraCHOP" },
       { label: "PyPI", href: "https://pypi.org/project/zebrachop/" },
-      { label: "Zenodo DOI", href: "https://zenodo.org/badge/latestdoi/1129378260" },
+      { label: "Zenodo DOI", href: "https://doi.org/10.5281/zenodo.20297752" },
     ],
   },
   {
