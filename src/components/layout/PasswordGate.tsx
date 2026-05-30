@@ -48,6 +48,12 @@ export default function PasswordGate({
       // sessionStorage can throw in some private modes; treat as locked
     }
     setChecking(false);
+
+    const onUnlock = (e: Event) => {
+      if ((e as CustomEvent).detail === storageKey) setUnlocked(true);
+    };
+    window.addEventListener("password-gate-unlock", onUnlock);
+    return () => window.removeEventListener("password-gate-unlock", onUnlock);
   }, [storageKey]);
 
   const handleSubmit = async (e: FormEvent) => {
@@ -64,6 +70,9 @@ export default function PasswordGate({
           // ignore, user can still proceed for this session in memory
         }
         setUnlocked(true);
+        window.dispatchEvent(
+          new CustomEvent("password-gate-unlock", { detail: storageKey }),
+        );
       } else {
         setError("That password didn't match. Try again.");
         setValue("");
